@@ -11,11 +11,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import ru.ionov.timetable.models.Day;
+import ru.ionov.timetable.models.Group;
 import ru.ionov.timetable.models.Lesson;
 
 public final class DataProvider
@@ -32,9 +31,9 @@ public final class DataProvider
 
     private DataProvider() {}
 
-    public static Map<String, String> getGroups() throws IOException
+    public static List<Group> getGroups() throws IOException
     {
-        Map<String, String> groups = new LinkedHashMap<>();
+        List<Group> groups = new ArrayList<>();
 
         Document document = Jsoup.connect(TIMETABLE_URL)
                 .method(Connection.Method.GET)
@@ -44,7 +43,7 @@ public final class DataProvider
 
         for (Element element : elements)
         {
-            groups.put(element.text(), element.attr(ATTR_VALUE));
+            groups.add(new Group(element.text(), element.attr(ATTR_VALUE)));
         }
 
         return groups;

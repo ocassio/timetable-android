@@ -1,11 +1,14 @@
 package ru.ionov.timetable.listeners;
 
-import android.os.Handler;
+import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import ru.ionov.timetable.DataProvider;
+import ru.ionov.timetable.models.Group;
 
 public class SwipeRefreshListener implements SwipeRefreshLayout.OnRefreshListener
 {
@@ -20,26 +23,34 @@ public class SwipeRefreshListener implements SwipeRefreshLayout.OnRefreshListene
     public void onRefresh()
     {
         //TODO reload data
-        new Handler().post(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    DataProvider.getGroups();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-                onRefreshComplete();
-            }
-        });
+        new RefreshGroupTask().execute();
     }
 
-    private void onRefreshComplete()
+    private class RefreshGroupTask extends AsyncTask<Void, Void, List<Group>>
     {
-        layout.setRefreshing(false);
+        @Override
+        protected List<Group> doInBackground(Void... params)
+        {
+            try
+            {
+                return DataProvider.getGroups();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<Group> groups)
+        {
+            for (Group group : groups)
+            {
+                System.out.println(group.getName() + " - " + group.getId());
+            }
+            layout.setRefreshing(false);
+        }
     }
 }
