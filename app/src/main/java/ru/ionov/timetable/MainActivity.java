@@ -1,9 +1,12 @@
 package ru.ionov.timetable;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import ru.ionov.timetable.listeners.SwipeRefreshListener;
 
 
 public class MainActivity extends ActionBarActivity
@@ -14,6 +17,9 @@ public class MainActivity extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshListener(swipeRefresh));
     }
 
     @Override
