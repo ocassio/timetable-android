@@ -3,23 +3,51 @@ package ru.ionov.timetable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import ru.ionov.timetable.adapters.GroupListItemAdapter;
 import ru.ionov.timetable.listeners.SwipeRefreshListener;
+import ru.ionov.timetable.models.Group;
 
 
 public class MainActivity extends ActionBarActivity
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        RecyclerView cardList = (RecyclerView) findViewById(R.id.groupList);
+        cardList.setLayoutManager(new LinearLayoutManager(this));
+        final GroupListItemAdapter groupListItemAdapter = new GroupListItemAdapter(new ArrayList<Group>());
+        cardList.setAdapter(groupListItemAdapter);
+
+        final SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshListener(swipeRefresh));
+
+        swipeRefresh.post(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                swipeRefresh.setRefreshing(true);
+                try
+                {
+                    groupListItemAdapter.reloadData(DataProvider.getGroups());
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override

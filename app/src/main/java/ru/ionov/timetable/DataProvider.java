@@ -43,7 +43,7 @@ public final class DataProvider
 
         for (Element element : elements)
         {
-            groups.add(new Group(element.text(), element.attr(ATTR_VALUE)));
+            groups.add(new Group(element.attr(ATTR_VALUE), element.text()));
         }
 
         return groups;
