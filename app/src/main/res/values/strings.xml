@@ -2,4 +2,7 @@
     <string name="app_name">Расписание</string>
 
     <string name="action_settings">Настройки</string>
+    <string name="title_activity_timetable">TimetableActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

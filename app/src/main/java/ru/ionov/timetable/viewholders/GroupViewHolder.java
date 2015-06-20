@@ -1,10 +1,13 @@
 package ru.ionov.timetable.viewholders;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import ru.ionov.timetable.R;
+import ru.ionov.timetable.activities.TimetableActivity;
 import ru.ionov.timetable.models.Group;
 import ru.ionov.timetable.providers.CacheProvider;
 
@@ -12,11 +15,15 @@ public class GroupViewHolder extends RecyclerView.ViewHolder implements View.OnC
 {
     private TextView name;
 
+    private Activity activity;
+
     private Group group;
 
-    public GroupViewHolder(View itemView)
+    public GroupViewHolder(View itemView, Activity activity)
     {
         super(itemView);
+        this.activity = activity;
+
         name = (TextView) itemView.findViewById(R.id.groupName);
 
         itemView.setOnClickListener(this);
@@ -46,16 +53,9 @@ public class GroupViewHolder extends RecyclerView.ViewHolder implements View.OnC
     @Override
     public void onClick(View v)
     {
-        Group group = CacheProvider.getGroup();
-        if (group != null)
-        {
-            System.out.println("Previous group: " + group.getName());
-        }
-        else
-        {
-            System.out.println("There is no group stored in preferences");
-        }
         CacheProvider.saveGroup(this.group);
-        System.out.println("New group: " + this.group.getName());
+
+        Intent intent = new Intent(activity, TimetableActivity.class);
+        activity.startActivity(intent);
     }
 }

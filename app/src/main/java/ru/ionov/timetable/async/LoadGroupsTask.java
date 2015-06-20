@@ -13,8 +13,8 @@ import ru.ionov.timetable.providers.DataProvider;
 
 public class LoadGroupsTask extends AsyncTask<Void, Void, List<Group>>
 {
-    private SwipeRefreshLayout layout;
-    private GroupTileAdapter groupTileAdapter;
+    private final SwipeRefreshLayout layout;
+    private final GroupTileAdapter groupTileAdapter;
 
     public LoadGroupsTask(SwipeRefreshLayout layout, GroupTileAdapter groupTileAdapter)
     {

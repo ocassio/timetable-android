@@ -11,29 +11,26 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 import ru.ionov.timetable.R;
-import ru.ionov.timetable.adapters.GroupTileAdapter;
-import ru.ionov.timetable.async.LoadGroupsTask;
-import ru.ionov.timetable.listeners.GroupsSwipeRefreshListener;
-import ru.ionov.timetable.models.Group;
-import ru.ionov.timetable.viewholders.DividerItemDecoration;
+import ru.ionov.timetable.adapters.DayCardAdapter;
+import ru.ionov.timetable.async.LoadTimetableTask;
+import ru.ionov.timetable.listeners.TimetableSwipeRefreshListener;
+import ru.ionov.timetable.models.Day;
 
-
-public class GroupsActivity extends ActionBarActivity
+public class TimetableActivity extends ActionBarActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_groups);
+        setContentView(R.layout.activity_timetable);
 
-        RecyclerView groupList = (RecyclerView) findViewById(R.id.groupList);
-        groupList.setLayoutManager(new LinearLayoutManager(this));
-        final GroupTileAdapter groupTileAdapter = new GroupTileAdapter(this, new ArrayList<Group>());
-        groupList.setAdapter(groupTileAdapter);
-        groupList.addItemDecoration(new DividerItemDecoration(this, null));
+        RecyclerView cardList = (RecyclerView) findViewById(R.id.cardList);
+        cardList.setLayoutManager(new LinearLayoutManager(this));
+        final DayCardAdapter dayCardAdapter = new DayCardAdapter(new ArrayList<Day>());
+        cardList.setAdapter(dayCardAdapter);
 
         final SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
-        swipeRefresh.setOnRefreshListener(new GroupsSwipeRefreshListener(swipeRefresh, groupTileAdapter));
+        swipeRefresh.setOnRefreshListener(new TimetableSwipeRefreshListener(swipeRefresh, dayCardAdapter));
         swipeRefresh.post(new Runnable()
         {
             @Override
@@ -43,14 +40,14 @@ public class GroupsActivity extends ActionBarActivity
             }
         });
 
-        new LoadGroupsTask(swipeRefresh, groupTileAdapter).execute();
+        new LoadTimetableTask(swipeRefresh, dayCardAdapter).execute();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_timetable, menu);
         return true;
     }
 

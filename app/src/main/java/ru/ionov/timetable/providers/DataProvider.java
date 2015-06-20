@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +48,16 @@ public final class DataProvider
         }
 
         return groups;
+    }
+
+    public static List<Day> getTimetableByGroup(String group) throws IOException
+    {
+        Calendar calendar = Calendar.getInstance();
+        Date from = calendar.getTime();
+        calendar.add(Calendar.DAY_OF_MONTH, 7);
+        Date to = calendar.getTime();
+
+        return getTimetableByGroup(group, from, to);
     }
 
     public static List<Day> getTimetableByGroup(String group, Date from, Date to) throws IOException
