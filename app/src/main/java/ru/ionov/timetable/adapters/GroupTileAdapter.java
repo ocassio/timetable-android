@@ -11,11 +11,11 @@ import ru.ionov.timetable.R;
 import ru.ionov.timetable.models.Group;
 import ru.ionov.timetable.viewholders.GroupViewHolder;
 
-public class GroupListItemAdapter extends RecyclerView.Adapter<GroupViewHolder>
+public class GroupTileAdapter extends RecyclerView.Adapter<GroupViewHolder>
 {
     private List<Group> groups;
 
-    public GroupListItemAdapter(List<Group> groups)
+    public GroupTileAdapter(List<Group> groups)
     {
         this.groups = groups;
     }
@@ -24,7 +24,7 @@ public class GroupListItemAdapter extends RecyclerView.Adapter<GroupViewHolder>
     public GroupViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.group_list_item, parent, false);
+                .inflate(R.layout.group_tile, parent, false);
 
         return new GroupViewHolder(view);
     }

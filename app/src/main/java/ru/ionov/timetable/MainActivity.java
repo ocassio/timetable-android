@@ -8,12 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import ru.ionov.timetable.adapters.GroupListItemAdapter;
+import ru.ionov.timetable.adapters.GroupTileAdapter;
+import ru.ionov.timetable.async.LoadGroupsTask;
 import ru.ionov.timetable.listeners.SwipeRefreshListener;
 import ru.ionov.timetable.models.Group;
+import ru.ionov.timetable.viewholders.DividerItemDecoration;
 
 
 public class MainActivity extends ActionBarActivity
@@ -26,28 +27,22 @@ public class MainActivity extends ActionBarActivity
 
         RecyclerView cardList = (RecyclerView) findViewById(R.id.groupList);
         cardList.setLayoutManager(new LinearLayoutManager(this));
-        final GroupListItemAdapter groupListItemAdapter = new GroupListItemAdapter(new ArrayList<Group>());
-        cardList.setAdapter(groupListItemAdapter);
+        final GroupTileAdapter groupTileAdapter = new GroupTileAdapter(new ArrayList<Group>());
+        cardList.setAdapter(groupTileAdapter);
+        cardList.addItemDecoration(new DividerItemDecoration(this, null));
 
         final SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshListener(swipeRefresh));
-
         swipeRefresh.post(new Runnable()
         {
             @Override
             public void run()
             {
                 swipeRefresh.setRefreshing(true);
-                try
-                {
-                    groupListItemAdapter.reloadData(DataProvider.getGroups());
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
             }
         });
+
+        new LoadGroupsTask(swipeRefresh, groupTileAdapter).execute();
     }
 
     @Override
