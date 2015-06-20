@@ -1,4 +1,4 @@
-package ru.ionov.timetable;
+package ru.ionov.timetable.activities;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
+import ru.ionov.timetable.R;
 import ru.ionov.timetable.adapters.GroupTileAdapter;
 import ru.ionov.timetable.async.LoadGroupsTask;
 import ru.ionov.timetable.listeners.SwipeRefreshListener;
@@ -17,7 +18,7 @@ import ru.ionov.timetable.models.Group;
 import ru.ionov.timetable.viewholders.DividerItemDecoration;
 
 
-public class MainActivity extends ActionBarActivity
+public class GroupsActivity extends ActionBarActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)

@@ -32,7 +32,7 @@ public class GroupTileAdapter extends RecyclerView.Adapter<GroupViewHolder>
     @Override
     public void onBindViewHolder(GroupViewHolder holder, int position)
     {
-        holder.getName().setText(groups.get(position).getName());
+        holder.setGroup(groups.get(position));
     }
 
     @Override

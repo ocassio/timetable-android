@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.ionov.timetable.DataProvider;
 import ru.ionov.timetable.adapters.GroupTileAdapter;
 import ru.ionov.timetable.models.Group;
+import ru.ionov.timetable.providers.DataProvider;
 
 public class LoadGroupsTask extends AsyncTask<Void, Void, List<Group>>
 {

@@ -1,4 +1,4 @@
-package ru.ionov.timetable;
+package ru.ionov.timetable.providers;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
