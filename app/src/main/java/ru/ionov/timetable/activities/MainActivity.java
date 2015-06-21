@@ -23,5 +23,6 @@ public class MainActivity extends Activity
             intent = new Intent(this, GroupsActivity.class);
         }
         startActivity(intent);
+        finish();
     }
 }
