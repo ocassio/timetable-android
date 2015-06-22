@@ -8,8 +8,12 @@ import android.text.TextUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import ru.ionov.timetable.models.Day;
 import ru.ionov.timetable.models.Group;
 
 public final class CacheProvider
@@ -19,6 +23,8 @@ public final class CacheProvider
     private static String GROUP_KEY = "group";
 
     private static String MISSING_CONTEXT_ERROR_MSG = "You must set application context before using other CacheProvider methods";
+
+    private static String TIMETABLE_CACHE_FILE_NAME = "timetable.json";
 
     private static ObjectMapper objectMapper = new ObjectMapper();
 
@@ -70,6 +76,47 @@ public final class CacheProvider
             catch (JsonProcessingException e)
             {
                 e.printStackTrace();
+            }
+        }
+        else
+        {
+            throw new IllegalStateException(MISSING_CONTEXT_ERROR_MSG);
+        }
+    }
+
+    public static void saveTimetable(List<Day> days)
+    {
+        if (context != null)
+        {
+            try
+            {
+                File file = new File(context.getCacheDir(), TIMETABLE_CACHE_FILE_NAME);
+                objectMapper.writeValue(file, days);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            throw new IllegalStateException(MISSING_CONTEXT_ERROR_MSG);
+        }
+    }
+
+    public static List<Day> getTimetable()
+    {
+        if (context != null)
+        {
+            try
+            {
+                File file = new File(context.getCacheDir(), TIMETABLE_CACHE_FILE_NAME);
+                return objectMapper.readValue(file, objectMapper.getTypeFactory().constructCollectionType(List.class, Day.class));
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+                return new ArrayList<>();
             }
         }
         else

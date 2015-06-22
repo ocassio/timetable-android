@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import ru.ionov.timetable.adapters.DayCardAdapter;
@@ -34,13 +33,17 @@ public class LoadTimetableTask extends AsyncTask<Void, Void, List<Day>>
         {
             e.printStackTrace();
         }
-        return new ArrayList<>();
+        return null;
     }
 
     @Override
     protected void onPostExecute(List<Day> days)
     {
-        dayCardAdapter.reloadData(days);
-        layout.setRefreshing(false);
+        if (days != null)
+        {
+            dayCardAdapter.reloadData(days);
+            layout.setRefreshing(false);
+            CacheProvider.saveTimetable(days);
+        }
     }
 }

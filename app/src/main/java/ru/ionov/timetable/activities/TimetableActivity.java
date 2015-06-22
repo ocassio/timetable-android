@@ -8,13 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.adapters.DayCardAdapter;
 import ru.ionov.timetable.async.LoadTimetableTask;
 import ru.ionov.timetable.listeners.TimetableSwipeRefreshListener;
-import ru.ionov.timetable.models.Day;
+import ru.ionov.timetable.providers.CacheProvider;
 
 public class TimetableActivity extends ActionBarActivity
 {
@@ -26,7 +24,7 @@ public class TimetableActivity extends ActionBarActivity
 
         RecyclerView cardList = (RecyclerView) findViewById(R.id.cardList);
         cardList.setLayoutManager(new LinearLayoutManager(this));
-        final DayCardAdapter dayCardAdapter = new DayCardAdapter(new ArrayList<Day>());
+        final DayCardAdapter dayCardAdapter = new DayCardAdapter(CacheProvider.getTimetable());
         cardList.setAdapter(dayCardAdapter);
 
         final SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
