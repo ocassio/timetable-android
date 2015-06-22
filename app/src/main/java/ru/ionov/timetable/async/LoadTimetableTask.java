@@ -1,11 +1,14 @@
 package ru.ionov.timetable.async;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
 
+import ru.ionov.timetable.R;
 import ru.ionov.timetable.adapters.DayCardAdapter;
 import ru.ionov.timetable.models.Day;
 import ru.ionov.timetable.providers.CacheProvider;
@@ -13,11 +16,14 @@ import ru.ionov.timetable.providers.DataProvider;
 
 public class LoadTimetableTask extends AsyncTask<Void, Void, List<Day>>
 {
+    private final Context context;
+
     private final SwipeRefreshLayout layout;
     private final DayCardAdapter dayCardAdapter;
 
-    public LoadTimetableTask(SwipeRefreshLayout layout, DayCardAdapter dayCardAdapter)
+    public LoadTimetableTask(Context context, SwipeRefreshLayout layout, DayCardAdapter dayCardAdapter)
     {
+        this.context = context;
         this.layout = layout;
         this.dayCardAdapter = dayCardAdapter;
     }
@@ -42,8 +48,12 @@ public class LoadTimetableTask extends AsyncTask<Void, Void, List<Day>>
         if (days != null)
         {
             dayCardAdapter.reloadData(days);
-            layout.setRefreshing(false);
             CacheProvider.saveTimetable(days);
         }
+        else
+        {
+            Toast.makeText(context, R.string.connection_problems_message, Toast.LENGTH_SHORT).show();
+        }
+        layout.setRefreshing(false);
     }
 }

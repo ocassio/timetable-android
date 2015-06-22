@@ -28,7 +28,7 @@ public class TimetableActivity extends ActionBarActivity
         cardList.setAdapter(dayCardAdapter);
 
         final SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
-        swipeRefresh.setOnRefreshListener(new TimetableSwipeRefreshListener(swipeRefresh, dayCardAdapter));
+        swipeRefresh.setOnRefreshListener(new TimetableSwipeRefreshListener(this, swipeRefresh, dayCardAdapter));
         swipeRefresh.post(new Runnable()
         {
             @Override
@@ -38,7 +38,7 @@ public class TimetableActivity extends ActionBarActivity
             }
         });
 
-        new LoadTimetableTask(swipeRefresh, dayCardAdapter).execute();
+        new LoadTimetableTask(this, swipeRefresh, dayCardAdapter).execute();
     }
 
     @Override

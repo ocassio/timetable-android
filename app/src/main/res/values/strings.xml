@@ -2,7 +2,16 @@
     <string name="app_name">Расписание</string>
 
     <string name="action_settings">Настройки</string>
-    <string name="title_activity_timetable">TimetableActivity</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="connection_problems_message">Не удалось загрузить данные</string>
+
+    <array name="daysOfWeek">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+        <item>Воскресенье</item>
+    </array>
 </resources>
