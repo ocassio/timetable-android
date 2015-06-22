@@ -24,7 +24,7 @@ public class TimetableActivity extends ActionBarActivity
 
         RecyclerView cardList = (RecyclerView) findViewById(R.id.cardList);
         cardList.setLayoutManager(new LinearLayoutManager(this));
-        final DayCardAdapter dayCardAdapter = new DayCardAdapter(CacheProvider.getTimetable());
+        final DayCardAdapter dayCardAdapter = new DayCardAdapter(this, CacheProvider.getTimetable());
         cardList.setAdapter(dayCardAdapter);
 
         final SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);

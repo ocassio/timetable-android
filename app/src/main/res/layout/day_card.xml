@@ -11,7 +11,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="16dp">
 
         <TextView
@@ -27,6 +27,12 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:paddingBottom="16dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lessonsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 

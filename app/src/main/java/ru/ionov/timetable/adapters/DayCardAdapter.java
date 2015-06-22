@@ -1,5 +1,6 @@
 package ru.ionov.timetable.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +14,13 @@ import ru.ionov.timetable.viewholders.DayViewHolder;
 
 public class DayCardAdapter extends RecyclerView.Adapter<DayViewHolder>
 {
+    private Context context;
+
     private List<Day> days;
 
-    public DayCardAdapter(List<Day> days)
+    public DayCardAdapter(Context context, List<Day> days)
     {
+        this.context = context;
         this.days = days;
     }
 
@@ -26,7 +30,7 @@ public class DayCardAdapter extends RecyclerView.Adapter<DayViewHolder>
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.day_card, parent, false);
 
-        return new DayViewHolder(view);
+        return new DayViewHolder(context, view);
     }
 
     @Override
