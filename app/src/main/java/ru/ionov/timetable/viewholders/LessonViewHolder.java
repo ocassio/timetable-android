@@ -1,5 +1,6 @@
 package ru.ionov.timetable.viewholders;
 
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -18,11 +19,16 @@ public class LessonViewHolder extends RecyclerView.ViewHolder
     {
         super(itemView);
 
-        number = (TextView) itemView.findViewById(R.id.lessonNum);
+//        number = (TextView) itemView.findViewById(R.id.lessonNum);
+
         name = (TextView) itemView.findViewById(R.id.lessonName);
+        name.setTypeface(Typeface.SANS_SERIF);
+
         room = (TextView) itemView.findViewById(R.id.lessonRoom);
-        type = (TextView) itemView.findViewById(R.id.lessonType);
+        room.setTypeface(Typeface.SANS_SERIF);
+//        type = (TextView) itemView.findViewById(R.id.lessonType);
         teacher = (TextView) itemView.findViewById(R.id.lessonTeacher);
+        teacher.setTypeface(Typeface.SANS_SERIF);
     }
 
     public TextView getNumber()

@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
-        android:padding="@dimen/activity_horizontal_margin"/>
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"/>
 
 </android.support.v4.widget.SwipeRefreshLayout>
