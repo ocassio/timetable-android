@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.nineoldandroids.view.ViewHelper;
+
 import ru.ionov.timetable.R;
 
 public class LessonViewHolder extends RecyclerView.ViewHolder
@@ -19,16 +21,21 @@ public class LessonViewHolder extends RecyclerView.ViewHolder
     {
         super(itemView);
 
-//        number = (TextView) itemView.findViewById(R.id.lessonNum);
+        number = (TextView) itemView.findViewById(R.id.lessonNum);
 
         name = (TextView) itemView.findViewById(R.id.lessonName);
         name.setTypeface(Typeface.SANS_SERIF);
 
         room = (TextView) itemView.findViewById(R.id.lessonRoom);
         room.setTypeface(Typeface.SANS_SERIF);
-//        type = (TextView) itemView.findViewById(R.id.lessonType);
+        ViewHelper.setAlpha(room, 0.57f);
+
+        type = (TextView) itemView.findViewById(R.id.lessonType);
+        ViewHelper.setAlpha(type, 0.57f);
+
         teacher = (TextView) itemView.findViewById(R.id.lessonTeacher);
         teacher.setTypeface(Typeface.SANS_SERIF);
+//        ViewHelper.setAlpha(teacher, 0.57f);
     }
 
     public TextView getNumber()

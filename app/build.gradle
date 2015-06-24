@@ -30,6 +30,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:22.1.1'
 
     compile 'org.jsoup:jsoup:1.7.2'
+    compile 'com.nineoldandroids:library:2.4.0+'
 
     compile (
             [group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.4.1'],

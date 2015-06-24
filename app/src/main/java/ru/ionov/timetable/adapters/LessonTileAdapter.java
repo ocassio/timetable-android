@@ -34,11 +34,11 @@ public class LessonTileAdapter extends RecyclerView.Adapter<LessonViewHolder>
     {
         Lesson lesson = lessons.get(position);
 
-//        holder.getNumber().setText(lesson.getNumber());
+        holder.getNumber().setText(lesson.getNumber());
         holder.getName().setText(lesson.getName());
         holder.getRoom().setText(lesson.getRoom());
         holder.getTeacher().setText(lesson.getTeacher());
-//        holder.getType().setText(lesson.getType());
+        holder.getType().setText(lesson.getType());
     }
 
     @Override
