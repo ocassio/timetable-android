@@ -64,9 +64,6 @@ public class DayViewHolder extends RecyclerView.ViewHolder
 
             lessonsList.setLayoutManager(new InnerRecyclerLayoutManager(context));
             lessonsList.setAdapter(new LessonTileAdapter(day.getLessons()));
-//            lessonsList.addItemDecoration(new DividerItemDecoration(context, null));
-//            LessonTileAdapter lessonTileAdapter = (LessonTileAdapter) lessonsList.getAdapter();
-//            lessonTileAdapter.reloadData(day.getLessons());
         }
         catch (ParseException e)
         {

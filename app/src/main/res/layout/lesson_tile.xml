@@ -4,16 +4,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp">
+    android:paddingTop="16dp">
 
     <TextView
         android:id="@+id/lessonNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="16dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
+        android:paddingRight="16dp"
         android:textSize="32sp"
         android:textColor="@color/secondary_text_default_material_light"
         android:layout_centerVertical="true"
@@ -25,18 +24,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@id/lessonNum"
-        android:layout_toRightOf="@id/lessonNum"/>
+        android:layout_toRightOf="@id/lessonNum"
+        android:textColor="@color/abc_secondary_text_material_light"/>
 
     <TextView
         android:id="@+id/lessonType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:textColor="@color/abc_secondary_text_material_light"
         android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/lessonName"
+        android:inputType="textMultiLine"
+        android:scrollHorizontally="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/lessonType"
@@ -44,10 +48,6 @@
         android:layout_toRightOf="@id/lessonNum"
         android:textColor="@color/abc_primary_text_material_light"
         android:textSize="16sp"/>
-
-
-
-
 
     <TextView
         android:id="@+id/lessonTeacher"

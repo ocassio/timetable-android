@@ -66,7 +66,8 @@ public final class DataProvider
                 .method(Connection.Method.POST)
                 .data("rel", REL_GROUP)
                 .data("vr", group)
-                .data("from", DATE_FORMAT.format(from))
+                //TODO remove this
+                .data("from", "01.05.15") //DATE_FORMAT.format(from))
                 .data("to", DATE_FORMAT.format(to))
                 .data("submit_button", "ПОКАЗАТЬ")
                 .post();
@@ -79,6 +80,12 @@ public final class DataProvider
     private static List<Day> getDays(Elements elements)
     {
         List<Day> days = new ArrayList<>();
+
+        // No lessons have been found
+        if (elements.size() == 1)
+        {
+            return days;
+        }
 
         int i = 0;
         while (i < elements.size())

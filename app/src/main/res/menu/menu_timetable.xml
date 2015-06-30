@@ -2,8 +2,16 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="ru.ionov.timetable.activities.TimetableActivity">
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
+
+    <item android:id="@+id/action_select_date"
+          android:title="@string/action_select_date"
           android:orderInCategory="100"
-          app:showAsAction="never"/>
+          android:icon="@android:drawable/ic_menu_my_calendar"
+          app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_select_group"
+          android:title="@string/action_select_group"
+          android:orderInCategory="200"
+          android:icon="@android:drawable/ic_menu_myplaces"
+          app:showAsAction="ifRoom"/>
 </menu>

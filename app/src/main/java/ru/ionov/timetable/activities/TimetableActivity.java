@@ -1,5 +1,6 @@
 package ru.ionov.timetable.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -57,10 +58,15 @@ public class TimetableActivity extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
+        switch (id)
         {
-            return true;
+            case R.id.action_select_group:
+                startActivity(new Intent(this, GroupsActivity.class));
+                return true;
+
+            case R.id.action_select_date:
+
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

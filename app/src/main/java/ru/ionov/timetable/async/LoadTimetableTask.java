@@ -47,6 +47,10 @@ public class LoadTimetableTask extends AsyncTask<Void, Void, List<Day>>
     {
         if (days != null)
         {
+            if (days.isEmpty())
+            {
+                Toast.makeText(context, R.string.no_lessons_found_message, Toast.LENGTH_LONG).show();
+            }
             dayCardAdapter.reloadData(days);
             CacheProvider.saveTimetable(days);
         }

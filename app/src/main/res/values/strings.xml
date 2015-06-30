@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Расписание</string>
 
-    <string name="action_settings">Настройки</string>
+    <string name="action_select_group">Выбрать группу</string>
+    <string name="action_select_date">Выбрать дату</string>
 
     <string name="connection_problems_message">Не удалось загрузить данные</string>
+    <string name="no_lessons_found_message">Пары отсутствуют</string>
 
     <array name="daysOfWeek">
         <item>Понедельник</item>
