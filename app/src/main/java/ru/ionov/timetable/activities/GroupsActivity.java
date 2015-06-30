@@ -13,7 +13,6 @@ import ru.ionov.timetable.adapters.GroupTileAdapter;
 import ru.ionov.timetable.async.LoadGroupsTask;
 import ru.ionov.timetable.listeners.GroupsSwipeRefreshListener;
 import ru.ionov.timetable.models.Group;
-import ru.ionov.timetable.viewholders.DividerItemDecoration;
 
 
 public class GroupsActivity extends ActionBarActivity
@@ -28,7 +27,6 @@ public class GroupsActivity extends ActionBarActivity
         groupList.setLayoutManager(new LinearLayoutManager(this));
         final GroupTileAdapter groupTileAdapter = new GroupTileAdapter(this, new ArrayList<Group>());
         groupList.setAdapter(groupTileAdapter);
-        groupList.addItemDecoration(new DividerItemDecoration(this, null));
 
         final SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         swipeRefresh.setOnRefreshListener(new GroupsSwipeRefreshListener(swipeRefresh, groupTileAdapter));

@@ -1,6 +1,7 @@
 package ru.ionov.timetable.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +38,16 @@ public class LessonTileAdapter extends RecyclerView.Adapter<LessonViewHolder>
         holder.getNumber().setText(lesson.getNumber());
         holder.getName().setText(lesson.getName());
         holder.getRoom().setText(lesson.getRoom());
-        holder.getTeacher().setText(lesson.getTeacher());
         holder.getType().setText(lesson.getType());
+
+        if (!TextUtils.isEmpty(lesson.getTeacher()))
+        {
+            holder.getTeacher().setText(lesson.getTeacher());
+        }
+        else
+        {
+            holder.getTeacher().setText("-");
+        }
     }
 
     @Override

@@ -14,14 +14,14 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <TextView
+        <ru.ionov.timetable.views.RobotoTextView
             android:id="@+id/dayDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:paddingTop="8dp"/>
 
-        <TextView
+        <ru.ionov.timetable.views.RobotoTextView
             android:id="@+id/dayDayOfWeek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
