@@ -29,7 +29,7 @@ public class GroupsActivity extends ActionBarActivity
         groupList.setAdapter(groupTileAdapter);
 
         final SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
-        swipeRefresh.setOnRefreshListener(new GroupsSwipeRefreshListener(swipeRefresh, groupTileAdapter));
+        swipeRefresh.setOnRefreshListener(new GroupsSwipeRefreshListener(this, swipeRefresh, groupTileAdapter));
         swipeRefresh.post(new Runnable()
         {
             @Override
@@ -39,6 +39,6 @@ public class GroupsActivity extends ActionBarActivity
             }
         });
 
-        new LoadGroupsTask(swipeRefresh, groupTileAdapter).execute();
+        new LoadGroupsTask(this, swipeRefresh, groupTileAdapter).execute();
     }
 }

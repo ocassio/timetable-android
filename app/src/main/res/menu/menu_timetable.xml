@@ -6,12 +6,12 @@
     <item android:id="@+id/action_select_date"
           android:title="@string/action_select_date"
           android:orderInCategory="100"
-          android:icon="@android:drawable/ic_menu_my_calendar"
+          android:icon="@drawable/ic_calendar_white_36dp"
           app:showAsAction="ifRoom"/>
 
     <item android:id="@+id/action_select_group"
           android:title="@string/action_select_group"
           android:orderInCategory="200"
-          android:icon="@android:drawable/ic_menu_myplaces"
+          android:icon="@drawable/ic_account_multiple_white_36dp"
           app:showAsAction="ifRoom"/>
 </menu>

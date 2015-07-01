@@ -26,7 +26,7 @@ public class GroupViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
         name = (TextView) itemView.findViewById(R.id.groupName);
 
-        itemView.setOnClickListener(this);
+        name.setOnClickListener(this);
     }
 
     public TextView getName()
