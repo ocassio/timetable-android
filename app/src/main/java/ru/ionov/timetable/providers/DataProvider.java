@@ -28,7 +28,7 @@ public final class DataProvider
 
     private static final String TIMETABLE_URL = "http://www.tolgas.ru/services/raspisanie/";
 
-    private static int COL_COUNT = 7;
+    private static final int COL_COUNT = 7;
 
     private DataProvider() {}
 

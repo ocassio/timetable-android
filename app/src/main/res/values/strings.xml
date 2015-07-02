@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Расписание</string>
 
+    <string name="title_activity_groups">Выбор группы</string>
     <string name="title_activity_date">Выбор даты</string>
 
+    <string name="action_search">Поиск</string>
     <string name="action_select_group">Выбрать группу</string>
     <string name="action_select_date">Выбрать дату</string>
 
