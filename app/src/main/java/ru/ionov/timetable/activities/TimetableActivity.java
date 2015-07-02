@@ -65,7 +65,7 @@ public class TimetableActivity extends ActionBarActivity
                 return true;
 
             case R.id.action_select_date:
-
+                startActivity(new Intent(this, DateActivity.class));
                 return true;
         }
 
