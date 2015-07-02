@@ -19,15 +19,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:paddingTop="8dp"/>
+            android:textColor="@color/abc_primary_text_material_light"/>
 
         <ru.ionov.timetable.views.RobotoTextView
             android:id="@+id/dayDayOfWeek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:paddingBottom="16dp"
-            android:textColor="@color/secondary_text_default_material_light"/>
+            android:textColor="@color/abc_secondary_text_material_light"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/lessonsList"
