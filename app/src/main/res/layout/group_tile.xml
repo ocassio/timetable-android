@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     card_view:cardCornerRadius="1dp"
     card_view:cardElevation="0dp"
-    card_view:cardMaxElevation="1dp">
+    card_view:cardMaxElevation="1dp"
+    card_view:cardPreventCornerOverlap="false"
+    card_view:cardUseCompatPadding="true">
 
     <ru.ionov.timetable.views.RobotoTextView
         android:clickable="true"

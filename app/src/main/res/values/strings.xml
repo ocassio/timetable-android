@@ -18,6 +18,9 @@
     <string name="date_selection_type_month">Текущий месяц</string>
     <string name="date_selection_type_custom">Свой вариант</string>
 
+    <string name="date_custom_from">От</string>
+    <string name="date_custom_to">До</string>
+
     <array name="daysOfWeek">
         <item>Понедельник</item>
         <item>Вторник</item>
