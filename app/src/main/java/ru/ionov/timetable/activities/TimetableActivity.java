@@ -8,6 +8,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.rey.material.app.DatePickerDialog;
+
+import java.util.Calendar;
 
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.adapters.DayCardAdapter;
@@ -65,7 +70,21 @@ public class TimetableActivity extends ActionBarActivity
                 return true;
 
             case R.id.action_select_date:
-                startActivity(new Intent(this, DateActivity.class));
+//                startActivity(new Intent(this, DateActivity.class));
+                final DatePickerDialog dialog = new DatePickerDialog(this);
+                dialog.date(Calendar.getInstance().getTimeInMillis());
+                dialog.dateRange(1, 1, 2015, 1, 1, 2016)
+                    .positiveAction("OK")
+                    .negativeAction("Отмена")
+                    .positiveActionClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            dialog.dismiss();
+                        }
+                    });
+                dialog.show();
                 return true;
         }
 

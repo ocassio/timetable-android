@@ -52,10 +52,11 @@
 
     </RadioGroup>
 
-    <DatePicker
-        android:id="@+id/customDateFrom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+    <!--<com.rey.material.widget.DatePicker-->
+        <!--android:id="@+id/customDateFrom"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--/>-->
 
 </LinearLayout>

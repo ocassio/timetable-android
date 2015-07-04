@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "ru.ionov.timetable"
-        minSdkVersion 8
+        minSdkVersion 9
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -28,6 +28,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:cardview-v7:22.1.1'
     compile 'com.android.support:recyclerview-v7:22.1.1'
+
+    compile 'com.github.rey5137:material:1.1.1'
 
     compile 'org.jsoup:jsoup:1.7.2'
     compile 'com.nineoldandroids:library:2.4.0'
