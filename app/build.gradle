@@ -16,10 +16,28 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        applicationVariants.all { variant ->
+            appendVersionName(variant, defaultConfig)
+        }
     }
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
+    }
+}
+
+def appendVersionName(variant, defaultConfig) {
+    variant.outputs.each { output ->
+        if (output.zipAlign) {
+            def file = output.outputFile
+            def fileName = "timetable-v" + defaultConfig.versionName  + ".apk";
+            output.outputFile = new File(file.parent, fileName)
+        }
+
+        def file = output.packageApplication.outputFile
+        def fileName = "timetable-release-v" + defaultConfig.versionName  + ".apk";
+        output.packageApplication.outputFile = new File(file.parent, fileName)
     }
 }
 
