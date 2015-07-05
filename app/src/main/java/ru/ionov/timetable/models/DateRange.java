@@ -2,6 +2,8 @@ package ru.ionov.timetable.models;
 
 import java.util.Date;
 
+import ru.ionov.timetable.utils.DateUtils;
+
 public class DateRange
 {
     private Date from;
@@ -43,5 +45,11 @@ public class DateRange
             from = to;
         }
         this.to = to;
+    }
+
+    @Override
+    public String toString()
+    {
+        return DateUtils.toString(from) + " - " + DateUtils.toString(to);
     }
 }

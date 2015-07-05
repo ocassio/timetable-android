@@ -8,10 +8,10 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import ru.ionov.timetable.models.DateRange;
 import ru.ionov.timetable.models.Day;
 import ru.ionov.timetable.models.Group;
 import ru.ionov.timetable.models.Lesson;
@@ -49,12 +49,8 @@ public final class DataProvider
 
     public static List<Day> getTimetableByGroup(String group) throws IOException
     {
-        Calendar calendar = Calendar.getInstance();
-        Date from = calendar.getTime();
-        calendar.add(Calendar.DAY_OF_MONTH, 7);
-        Date to = calendar.getTime();
-
-        return getTimetableByGroup(group, from, to);
+        DateRange dateRange = PreferencesProvider.getDateRange();
+        return getTimetableByGroup(group, dateRange.getFrom(), dateRange.getTo());
     }
 
     public static List<Day> getTimetableByGroup(String group, Date from, Date to) throws IOException
@@ -63,8 +59,7 @@ public final class DataProvider
                 .method(Connection.Method.POST)
                 .data("rel", REL_GROUP)
                 .data("vr", group)
-                //TODO remove this
-                .data("from", "01.05.15") //DATE_FORMAT.format(from))
+                .data("from", DateUtils.toString(from))
                 .data("to", DateUtils.toString(to))
                 .data("submit_button", "ПОКАЗАТЬ")
                 .post();

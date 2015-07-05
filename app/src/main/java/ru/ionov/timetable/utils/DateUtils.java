@@ -15,7 +15,9 @@ public final class DateUtils
 {
     private static Context context;
 
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", new Locale("ru", "RU"));
+    private static final Locale LOCALE = new Locale("ru", "RU");
+
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", LOCALE);
 
     private static final String MISSING_CONTEXT_ERROR_MSG = "You must set application context before using other DateUtils methods";
 
@@ -78,5 +80,61 @@ public final class DateUtils
     {
         Date currentDate = Calendar.getInstance().getTime();
         return new DateRange(currentDate, currentDate);
+    }
+
+    public static DateRange getSevenDays()
+    {
+        DateRange dateRange = new DateRange();
+        Calendar calendar = Calendar.getInstance();
+
+        dateRange.setFrom(calendar.getTime());
+
+        calendar.add(Calendar.DAY_OF_MONTH, 6);
+        dateRange.setTo(calendar.getTime());
+
+        return dateRange;
+    }
+
+    public static DateRange getCurrentWeek()
+    {
+        DateRange dateRange = new DateRange();
+        Calendar calendar = Calendar.getInstance(LOCALE);
+
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getActualMinimum(Calendar.DAY_OF_WEEK));
+        dateRange.setFrom(calendar.getTime());
+
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getActualMaximum(Calendar.DAY_OF_WEEK));
+        dateRange.setTo(calendar.getTime());
+
+        return dateRange;
+    }
+
+    public static DateRange getNextWeek()
+    {
+        DateRange dateRange = new DateRange();
+        Calendar calendar = Calendar.getInstance(LOCALE);
+        calendar.add(Calendar.DAY_OF_MONTH, 7);
+
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getActualMinimum(Calendar.DAY_OF_WEEK));
+        dateRange.setFrom(calendar.getTime());
+
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getActualMaximum(Calendar.DAY_OF_WEEK));
+        dateRange.setTo(calendar.getTime());
+
+        return dateRange;
+    }
+
+    public static DateRange getCurrentMonth()
+    {
+        DateRange dateRange = new DateRange();
+        Calendar calendar = Calendar.getInstance(LOCALE);
+
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        dateRange.setFrom(calendar.getTime());
+
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        dateRange.setTo(calendar.getTime());
+
+        return dateRange;
     }
 }

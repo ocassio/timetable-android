@@ -151,4 +151,31 @@ public final class PreferencesProvider
             throw new IllegalStateException(MISSING_CONTEXT_ERROR_MSG);
         }
     }
+
+    public static DateRange getDateRange()
+    {
+        int dateType = getDateType();
+        switch (dateType)
+        {
+            case R.id.dateSelectionTypeToday:
+                return DateUtils.getDefaultDateRange();
+
+            case R.id.dateSelectionTypeSevenDays:
+                return DateUtils.getSevenDays();
+
+            case R.id.dateSelectionTypeWeek:
+                return DateUtils.getCurrentWeek();
+
+            case R.id.dateSelectionTypeNextWeek:
+                return DateUtils.getNextWeek();
+
+            case R.id.dateSelectionTypeMonth:
+                return DateUtils.getCurrentMonth();
+
+            case R.id.dateSelectionTypeCustom:
+                return getCustomDateRange();
+        }
+
+        throw new IllegalArgumentException("Unknown date type");
+    }
 }
