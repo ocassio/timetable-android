@@ -13,6 +13,7 @@ import ru.ionov.timetable.adapters.DayCardAdapter;
 import ru.ionov.timetable.models.Day;
 import ru.ionov.timetable.providers.CacheProvider;
 import ru.ionov.timetable.providers.DataProvider;
+import ru.ionov.timetable.providers.PreferencesProvider;
 
 public class LoadTimetableTask extends AsyncTask<Void, Void, List<Day>>
 {
@@ -33,7 +34,7 @@ public class LoadTimetableTask extends AsyncTask<Void, Void, List<Day>>
     {
         try
         {
-            return DataProvider.getTimetableByGroup(CacheProvider.getGroup().getId());
+            return DataProvider.getTimetableByGroup(PreferencesProvider.getGroup().getId());
         }
         catch (IOException e)
         {

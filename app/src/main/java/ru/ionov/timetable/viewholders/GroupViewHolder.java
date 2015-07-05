@@ -9,7 +9,7 @@ import android.widget.TextView;
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.activities.TimetableActivity;
 import ru.ionov.timetable.models.Group;
-import ru.ionov.timetable.providers.CacheProvider;
+import ru.ionov.timetable.providers.PreferencesProvider;
 
 public class GroupViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
@@ -53,7 +53,7 @@ public class GroupViewHolder extends RecyclerView.ViewHolder implements View.OnC
     @Override
     public void onClick(View v)
     {
-        CacheProvider.saveGroup(this.group);
+        PreferencesProvider.setGroup(this.group);
 
         Intent intent = new Intent(activity, TimetableActivity.class);
         activity.startActivity(intent);

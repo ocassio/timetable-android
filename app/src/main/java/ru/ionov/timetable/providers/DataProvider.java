@@ -7,8 +7,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,11 +15,10 @@ import java.util.List;
 import ru.ionov.timetable.models.Day;
 import ru.ionov.timetable.models.Group;
 import ru.ionov.timetable.models.Lesson;
+import ru.ionov.timetable.utils.DateUtils;
 
 public final class DataProvider
 {
-    public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
-
     private static final String REL_GROUP = "0";
 
     private static final String ATTR_VALUE = "value";
@@ -68,7 +65,7 @@ public final class DataProvider
                 .data("vr", group)
                 //TODO remove this
                 .data("from", "01.05.15") //DATE_FORMAT.format(from))
-                .data("to", DATE_FORMAT.format(to))
+                .data("to", DateUtils.toString(to))
                 .data("submit_button", "ПОКАЗАТЬ")
                 .post();
 
@@ -91,7 +88,7 @@ public final class DataProvider
         while (i < elements.size())
         {
             String date = elements.get(i).text();
-            if (isDate(date))
+            if (DateUtils.isDate(date))
             {
                 Day day = new Day(date);
                 i++;
@@ -107,7 +104,7 @@ public final class DataProvider
 
                     day.addLesson(new Lesson(params));
                 }
-                while (i < elements.size() && !isDate(elements.get(i).text()));
+                while (i < elements.size() && !DateUtils.isDate(elements.get(i).text()));
 
                 days.add(day);
             }
@@ -116,17 +113,5 @@ public final class DataProvider
         return days;
     }
 
-    private static boolean isDate(String value)
-    {
-        try
-        {
-            DATE_FORMAT.parse(value);
-        }
-        catch (ParseException e)
-        {
-            return false;
-        }
 
-        return true;
-    }
 }

@@ -10,7 +10,6 @@ import java.text.ParseException;
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.adapters.LessonTileAdapter;
 import ru.ionov.timetable.models.Day;
-import ru.ionov.timetable.providers.DataProvider;
 import ru.ionov.timetable.utils.DateUtils;
 import ru.ionov.timetable.views.InnerRecyclerLayoutManager;
 
@@ -58,7 +57,7 @@ public class DayViewHolder extends RecyclerView.ViewHolder
 
         try
         {
-            String dayOfWeek = DateUtils.getDayOfWeekName(DataProvider.DATE_FORMAT.parse(day.getDate()));
+            String dayOfWeek = DateUtils.getDayOfWeekName(DateUtils.toDate(day.getDate()));
             this.dayOfWeek.setText(dayOfWeek);
 
 

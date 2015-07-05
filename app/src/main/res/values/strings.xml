@@ -21,6 +21,9 @@
     <string name="date_custom_from">От</string>
     <string name="date_custom_to">До</string>
 
+    <string name="ok">OK</string>
+    <string name="cancel">Отмена</string>
+
     <array name="daysOfWeek">
         <item>Понедельник</item>
         <item>Вторник</item>

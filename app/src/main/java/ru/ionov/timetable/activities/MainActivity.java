@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import ru.ionov.timetable.providers.CacheProvider;
+import ru.ionov.timetable.providers.PreferencesProvider;
 
 public class MainActivity extends Activity
 {
@@ -14,7 +14,7 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
 
         Intent intent;
-        if (CacheProvider.getGroup() != null)
+        if (PreferencesProvider.getGroup() != null)
         {
             intent = new Intent(this, TimetableActivity.class);
         }

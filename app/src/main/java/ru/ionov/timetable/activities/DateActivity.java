@@ -12,9 +12,5 @@ public class DateActivity extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date);
-
-//        DatePicker datePicker = (DatePicker) findViewById(R.id.customDateFrom);
-//        datePicker.setDateRange(1, 1, 2015, 1, 1, 2016);
-//        datePicker.setDate(1, 07, 2015);
     }
 }
