@@ -100,10 +100,10 @@ public final class DateUtils
         DateRange dateRange = new DateRange();
         Calendar calendar = Calendar.getInstance(LOCALE);
 
-        calendar.set(Calendar.DAY_OF_WEEK, calendar.getActualMinimum(Calendar.DAY_OF_WEEK));
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
         dateRange.setFrom(calendar.getTime());
 
-        calendar.set(Calendar.DAY_OF_WEEK, calendar.getActualMaximum(Calendar.DAY_OF_WEEK));
+        calendar.add(Calendar.DAY_OF_WEEK, 6);
         dateRange.setTo(calendar.getTime());
 
         return dateRange;
@@ -115,10 +115,10 @@ public final class DateUtils
         Calendar calendar = Calendar.getInstance(LOCALE);
         calendar.add(Calendar.DAY_OF_MONTH, 7);
 
-        calendar.set(Calendar.DAY_OF_WEEK, calendar.getActualMinimum(Calendar.DAY_OF_WEEK));
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
         dateRange.setFrom(calendar.getTime());
 
-        calendar.set(Calendar.DAY_OF_WEEK, calendar.getActualMaximum(Calendar.DAY_OF_WEEK));
+        calendar.add(Calendar.DAY_OF_WEEK, 6);
         dateRange.setTo(calendar.getTime());
 
         return dateRange;
