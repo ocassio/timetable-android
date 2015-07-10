@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -24,7 +24,8 @@ public class TimetableActivity extends ActionBarActivity
         setContentView(R.layout.activity_timetable);
 
         RecyclerView cardList = (RecyclerView) findViewById(R.id.cardList);
-        cardList.setLayoutManager(new LinearLayoutManager(this));
+        int spanCount = getResources().getBoolean(R.bool.isWide) ? 2 : 1;
+        cardList.setLayoutManager(new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL));
         final DayCardAdapter dayCardAdapter = new DayCardAdapter(this, CacheProvider.getTimetable());
         cardList.setAdapter(dayCardAdapter);
 
@@ -66,20 +67,6 @@ public class TimetableActivity extends ActionBarActivity
 
             case R.id.action_select_date:
                 startActivity(new Intent(this, DateActivity.class));
-//                final DatePickerDialog dialog = new DatePickerDialog(this);
-//                dialog.date(Calendar.getInstance().getTimeInMillis());
-//                dialog.dateRange(1, 1, 2015, 1, 1, 2016)
-//                    .positiveAction("OK")
-//                    .negativeAction("Отмена")
-//                    .positiveActionClickListener(new View.OnClickListener()
-//                    {
-//                        @Override
-//                        public void onClick(View v)
-//                        {
-//                            dialog.dismiss();
-//                        }
-//                    });
-//                dialog.show();
                 return true;
         }
 
