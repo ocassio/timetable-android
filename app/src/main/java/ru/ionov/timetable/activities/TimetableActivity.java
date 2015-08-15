@@ -27,6 +27,7 @@ public class TimetableActivity extends ActionBarActivity
         int spanCount = getResources().getBoolean(R.bool.isWide) ? 2 : 1;
         cardList.setLayoutManager(new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL));
         final DayCardAdapter dayCardAdapter = new DayCardAdapter(this, CacheProvider.getTimetable());
+        dayCardAdapter.setHasStableIds(true);
         cardList.setAdapter(dayCardAdapter);
 
         final SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);

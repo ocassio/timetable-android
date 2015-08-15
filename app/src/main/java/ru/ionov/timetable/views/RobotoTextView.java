@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 public class RobotoTextView extends TextView
 {
+    private static Typeface font;
+
     public RobotoTextView(Context context)
     {
         super(context);
@@ -27,7 +29,10 @@ public class RobotoTextView extends TextView
 
     private void setFont()
     {
-        Typeface font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Regular.ttf");
+        if (font == null)
+        {
+            font = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Regular.ttf");
+        }
         setTypeface(font);
     }
 }
