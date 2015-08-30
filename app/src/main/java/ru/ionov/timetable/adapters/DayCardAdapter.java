@@ -45,6 +45,12 @@ public class DayCardAdapter extends RecyclerView.Adapter<DayViewHolder>
         return days.size();
     }
 
+    @Override
+    public long getItemId(int position)
+    {
+        return days.get(position).getDate().hashCode();
+    }
+
     public void reloadData(List<Day> days)
     {
         this.days = days;
