@@ -93,8 +93,8 @@ public class DateFragment extends Fragment
         TextView fromView = (TextView) rootView.findViewById(R.id.customDateFromValue);
         TextView toView = (TextView) rootView.findViewById(R.id.customDateToValue);
 
-        fromView.setText(DateUtils.toString(customDateRange.getFrom()));
-        toView.setText(DateUtils.toString(customDateRange.getTo()));
+        fromView.setText(DateUtils.toDateString(customDateRange.getFrom()));
+        toView.setText(DateUtils.toDateString(customDateRange.getTo()));
     }
 
     private void setOnCustomDateValuesClickListeners()

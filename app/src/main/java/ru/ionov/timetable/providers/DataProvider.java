@@ -7,7 +7,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import ru.ionov.timetable.models.DateRange;
 import ru.ionov.timetable.models.Day;
 import ru.ionov.timetable.models.Group;
 import ru.ionov.timetable.models.Lesson;
+import ru.ionov.timetable.models.TimeRange;
 import ru.ionov.timetable.utils.DateUtils;
 
 public final class DataProvider
@@ -26,6 +29,30 @@ public final class DataProvider
     private static final String TIMETABLE_URL = "http://www.tolgas.ru/services/raspisanie/";
 
     private static final int COL_COUNT = 7;
+
+    private static final List<TimeRange> TIME_RANGES = new ArrayList<TimeRange>()
+    {
+        {
+            add(new TimeRange("09:00", "10:35"));
+            add(new TimeRange("10:45", "12:20"));
+            add(new TimeRange("13:00", "14:35"));
+            add(new TimeRange("14:45", "16:20"));
+            add(new TimeRange("16:30", "18:05"));
+            add(new TimeRange("18:15", "19:50"));
+            add(new TimeRange("20:00", "21:35"));
+        }
+    };
+
+    private static final List<TimeRange> TIME_RANGES_SATURDAY = new ArrayList<TimeRange>()
+    {
+        {
+            add(new TimeRange("08:30", "10:05"));
+            add(new TimeRange("10:15", "11:50"));
+            add(new TimeRange("12:35", "14:10"));
+            add(new TimeRange("14:20", "15:55"));
+            add(new TimeRange("16:05", "17:35"));
+        }
+    };
 
     private DataProvider() {}
 
@@ -59,8 +86,8 @@ public final class DataProvider
                 .method(Connection.Method.POST)
                 .data("rel", REL_GROUP)
                 .data("vr", group)
-                .data("from", DateUtils.toString(from))
-                .data("to", DateUtils.toString(to))
+                .data("from", DateUtils.toDateString(from))
+                .data("to", DateUtils.toDateString(to))
                 .data("submit_button", "ПОКАЗАТЬ")
                 .post();
 
@@ -97,7 +124,9 @@ public final class DataProvider
                         i++;
                     }
 
-                    day.addLesson(new Lesson(params));
+                    Lesson lesson = new Lesson(params);
+                    setTimeRanges(date, lesson);
+                    day.addLesson( lesson);
                 }
                 while (i < elements.size() && !DateUtils.isDate(elements.get(i).text()));
 
@@ -108,5 +137,30 @@ public final class DataProvider
         return days;
     }
 
-
+    private static void setTimeRanges(String stringDate, Lesson lesson)
+    {
+        try
+        {
+            Date date = DateUtils.toDate(stringDate);
+            int lessonNum = Integer.parseInt(lesson.getNumber());
+            if (!DateUtils.equalsDayOfWeek(date, Calendar.SATURDAY))
+            {
+                if (lessonNum <= TIME_RANGES.size())
+                {
+                    lesson.setTime(TIME_RANGES.get(lessonNum - 1));
+                }
+            }
+            else
+            {
+                if (lessonNum <= TIME_RANGES_SATURDAY.size())
+                {
+                    lesson.setTime(TIME_RANGES_SATURDAY.get(lessonNum - 1));
+                }
+            }
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

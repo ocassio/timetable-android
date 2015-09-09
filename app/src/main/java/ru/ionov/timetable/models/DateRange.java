@@ -50,6 +50,6 @@ public class DateRange
     @Override
     public String toString()
     {
-        return DateUtils.toString(from) + " - " + DateUtils.toString(to);
+        return DateUtils.toDateString(from) + " - " + DateUtils.toDateString(to);
     }
 }

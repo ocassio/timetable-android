@@ -17,6 +17,7 @@ public final class DateUtils
 
     private static final Locale LOCALE = new Locale("ru", "RU");
 
+    private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("hh:mm", LOCALE);
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", LOCALE);
 
     private static final String MISSING_CONTEXT_ERROR_MSG = "You must set application context before using other DateUtils methods";
@@ -28,9 +29,14 @@ public final class DateUtils
         DateUtils.context = context;
     }
 
-    public static String toString(Date date)
+    public static String toDateString(Date date)
     {
         return DATE_FORMAT.format(date);
+    }
+
+    public static String toTimeString(Date date)
+    {
+        return TIME_FORMAT.format(date);
     }
 
     public static Date toDate(String string) throws ParseException
@@ -74,6 +80,14 @@ public final class DateUtils
         {
             throw new IllegalStateException(MISSING_CONTEXT_ERROR_MSG);
         }
+    }
+
+    public static boolean equalsDayOfWeek(Date date, int dayOfWeek)
+    {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        return calendar.get(Calendar.DAY_OF_WEEK) == dayOfWeek;
     }
 
     public static DateRange getDefaultDateRange()
