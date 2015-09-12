@@ -18,8 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.GroupsActivity"
-            android:label="@string/title_activity_groups" >
+            android:name=".activities.GroupsActivity" >
         </activity>
         <activity
             android:name=".activities.TimetableActivity"

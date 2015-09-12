@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Расписание</string>
 
-    <string name="title_activity_groups">Выбор группы</string>
     <string name="title_activity_date">Выбор даты</string>
 
     <string name="action_search">Поиск</string>
@@ -32,5 +31,11 @@
         <item>Пятница</item>
         <item>Суббота</item>
         <item>Воскресенье</item>
+    </array>
+
+    <array name="criteria">
+        <item>Группы</item>
+        <item>Преподаватели</item>
+        <item>Аудитории</item>
     </array>
 </resources>
