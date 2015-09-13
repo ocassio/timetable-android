@@ -8,8 +8,8 @@ android {
         applicationId "ru.ionov.timetable"
         minSdkVersion 9
         targetSdkVersion 22
-        versionCode 5
-        versionName "1.0.4"
+        versionCode 6
+        versionName "1.1"
     }
     buildTypes {
         release {
