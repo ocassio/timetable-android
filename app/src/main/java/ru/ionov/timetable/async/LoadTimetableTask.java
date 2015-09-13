@@ -34,7 +34,7 @@ public class LoadTimetableTask extends AsyncTask<Void, Void, List<Day>>
     {
         try
         {
-            return DataProvider.getTimetableByGroup(PreferencesProvider.getGroup().getId());
+            return DataProvider.getTimetable(PreferencesProvider.getCriterion().getId());
         }
         catch (IOException e)
         {

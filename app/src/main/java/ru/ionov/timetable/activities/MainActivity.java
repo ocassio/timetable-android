@@ -14,13 +14,13 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
 
         Intent intent;
-        if (PreferencesProvider.getGroup() != null)
+        if (PreferencesProvider.getCriterion() != null)
         {
             intent = new Intent(this, TimetableActivity.class);
         }
         else
         {
-            intent = new Intent(this, GroupsActivity.class);
+            intent = new Intent(this, CriteriaActivity.class);
         }
         startActivity(intent);
         finish();

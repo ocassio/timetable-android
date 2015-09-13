@@ -3,16 +3,16 @@ package ru.ionov.timetable.models;
 
 import java.io.Serializable;
 
-public class Group implements Serializable
+public class Criterion implements Serializable
 {
     private String id;
     private String name;
 
-    public Group()
+    public Criterion()
     {
     }
 
-    public Group(String id, String name)
+    public Criterion(String id, String name)
     {
         this.id = id;
         this.name = name;

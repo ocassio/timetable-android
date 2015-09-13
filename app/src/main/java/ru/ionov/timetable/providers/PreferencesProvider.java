@@ -9,8 +9,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 
 import ru.ionov.timetable.R;
+import ru.ionov.timetable.models.Criterion;
 import ru.ionov.timetable.models.DateRange;
-import ru.ionov.timetable.models.Group;
 import ru.ionov.timetable.utils.DateUtils;
 import ru.ionov.timetable.utils.JSONUtils;
 
@@ -18,7 +18,8 @@ public final class PreferencesProvider
 {
     private static Context context;
 
-    private static final String GROUP_KEY = "group";
+    private static final String CRITERIA_TYPE_KEY = "criteriaType";
+    private static final String CRITERION_KEY = "criterion";
     private static final String DATE_TYPE_KEY = "dateType";
     private static final String DATE_RANGE_KEY = "dateRange";
 
@@ -36,16 +37,43 @@ public final class PreferencesProvider
         PreferencesProvider.context = context;
     }
 
-    public static Group getGroup()
+    public static int getCriteriaType()
+    {
+        if (context != null)
+        {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+            return preferences.getInt(CRITERIA_TYPE_KEY, context.getResources().getInteger(R.integer.criteriaTypeGroup));
+        }
+        else
+        {
+            throw new IllegalStateException(MISSING_CONTEXT_ERROR_MSG);
+        }
+    }
+
+    public static void setCriteriaType(int criteriaType)
+    {
+        if (context != null)
+        {
+            SharedPreferences.Editor preferences = PreferenceManager.getDefaultSharedPreferences(context).edit();
+            preferences.putInt(CRITERIA_TYPE_KEY, criteriaType);
+            preferences.apply();
+        }
+        else
+        {
+            throw new IllegalStateException(MISSING_CONTEXT_ERROR_MSG);
+        }
+    }
+
+    public static Criterion getCriterion()
     {
         if (context != null)
         {
             try
             {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-                String groupJSON = preferences.getString(GROUP_KEY, null);
+                String groupJSON = preferences.getString(CRITERION_KEY, null);
 
-                return JSONUtils.toObject(groupJSON, Group.class);
+                return JSONUtils.toObject(groupJSON, Criterion.class);
             }
             catch (IOException e)
             {
@@ -59,14 +87,14 @@ public final class PreferencesProvider
         }
     }
 
-    public static void setGroup(Group group)
+    public static void setCriterion(Criterion criterion)
     {
         if (context != null)
         {
             try
             {
                 SharedPreferences.Editor preferences = PreferenceManager.getDefaultSharedPreferences(context).edit();
-                preferences.putString(GROUP_KEY, JSONUtils.toJSONString(group));
+                preferences.putString(CRITERION_KEY, JSONUtils.toJSONString(criterion));
                 preferences.apply();
             }
             catch (JsonProcessingException e)

@@ -5,7 +5,7 @@
               android:orientation="horizontal">
 
     <Spinner
-        android:id="@+id/criterion_spinner"
+        android:id="@+id/criteria_type_spinner"
         android:theme="@style/ActionBarSpinnerTheme"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent" />

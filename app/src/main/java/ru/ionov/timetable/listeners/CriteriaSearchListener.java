@@ -2,13 +2,13 @@ package ru.ionov.timetable.listeners;
 
 import android.support.v7.widget.SearchView;
 
-import ru.ionov.timetable.adapters.GroupTileAdapter;
+import ru.ionov.timetable.adapters.CriterionTileAdapter;
 
-public class GroupsSearchListener implements SearchView.OnQueryTextListener
+public class CriteriaSearchListener implements SearchView.OnQueryTextListener
 {
-    private GroupTileAdapter adapter;
+    private CriterionTileAdapter adapter;
 
-    public GroupsSearchListener(GroupTileAdapter adapter)
+    public CriteriaSearchListener(CriterionTileAdapter adapter)
     {
         this.adapter = adapter;
     }

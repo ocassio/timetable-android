@@ -11,22 +11,24 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import ru.ionov.timetable.models.Criterion;
 import ru.ionov.timetable.models.DateRange;
 import ru.ionov.timetable.models.Day;
-import ru.ionov.timetable.models.Group;
 import ru.ionov.timetable.models.Lesson;
 import ru.ionov.timetable.models.TimeRange;
 import ru.ionov.timetable.utils.DateUtils;
 
 public final class DataProvider
 {
-    private static final String REL_GROUP = "0";
+    private static final String TIMETABLE_URL = "http://www.tolgas.ru/services/raspisanie/";
+    private static final String POST_DATA_CHARSET = "windows-1251";
+    private static final int CONNECTION_TIMEOUT = 15000;
 
     private static final String ATTR_VALUE = "value";
-
-    private static final String TIMETABLE_URL = "http://www.tolgas.ru/services/raspisanie/";
 
     private static final int COL_COUNT = 7;
 
@@ -54,38 +56,59 @@ public final class DataProvider
         }
     };
 
+    private static Map<Integer, List<Criterion>> criteriaCaches = new HashMap<>();
+
     private DataProvider() {}
 
-    public static List<Group> getGroups() throws IOException
+    public static List<Criterion> getCriteria() throws IOException
     {
-        List<Group> groups = new ArrayList<>();
+        int criteriaType = PreferencesProvider.getCriteriaType();
+        return getCriteria(criteriaType, true);
+    }
 
-        Document document = Jsoup.connect(TIMETABLE_URL)
-                .method(Connection.Method.GET)
-                .get();
+    public static List<Criterion> getCriteria(int criteriaType, boolean forced) throws IOException
+    {
+        List<Criterion> criteria = criteriaCaches.get(criteriaType);
 
-        Elements elements = document.select("#vr option");
-
-        for (Element element : elements)
+        if (forced || criteria == null || criteria.isEmpty())
         {
-            groups.add(new Group(element.attr(ATTR_VALUE), element.text()));
+            criteria = new ArrayList<>();
+
+            Document document = Jsoup.connect(TIMETABLE_URL)
+                    .timeout(CONNECTION_TIMEOUT)
+                    .method(Connection.Method.GET)
+                    .data("id", Integer.toString(criteriaType))
+                    .get();
+
+            Elements elements = document.select("#vr option");
+
+            for (Element element : elements)
+            {
+                criteria.add(new Criterion(element.attr(ATTR_VALUE), element.text()));
+            }
+
+            criteriaCaches.put(criteriaType, criteria);
         }
 
-        return groups;
+        return criteria;
     }
 
-    public static List<Day> getTimetableByGroup(String group) throws IOException
+    public static List<Day> getTimetable(String criterion) throws IOException
     {
         DateRange dateRange = PreferencesProvider.getDateRange();
-        return getTimetableByGroup(group, dateRange.getFrom(), dateRange.getTo());
+        return getTimetable(criterion, dateRange.getFrom(), dateRange.getTo());
     }
 
-    public static List<Day> getTimetableByGroup(String group, Date from, Date to) throws IOException
+    public static List<Day> getTimetable(String criterion, Date from, Date to) throws IOException
     {
+        int rel = PreferencesProvider.getCriteriaType();
+
         Document document = Jsoup.connect(TIMETABLE_URL)
+                .postDataCharset(POST_DATA_CHARSET)
+                .timeout(CONNECTION_TIMEOUT)
                 .method(Connection.Method.POST)
-                .data("rel", REL_GROUP)
-                .data("vr", group)
+                .data("rel", Integer.toString(rel))
+                .data("vr", criterion)
                 .data("from", DateUtils.toDateString(from))
                 .data("to", DateUtils.toDateString(to))
                 .data("submit_button", "ПОКАЗАТЬ")

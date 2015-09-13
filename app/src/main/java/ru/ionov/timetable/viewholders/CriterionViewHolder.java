@@ -1,25 +1,25 @@
 package ru.ionov.timetable.viewholders;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import ru.ionov.timetable.R;
+import ru.ionov.timetable.activities.CriteriaActivity;
 import ru.ionov.timetable.activities.TimetableActivity;
-import ru.ionov.timetable.models.Group;
+import ru.ionov.timetable.models.Criterion;
 import ru.ionov.timetable.providers.PreferencesProvider;
 
-public class GroupViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+public class CriterionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
     private TextView name;
 
-    private Activity activity;
+    private CriteriaActivity activity;
 
-    private Group group;
+    private Criterion criterion;
 
-    public GroupViewHolder(View itemView, Activity activity)
+    public CriterionViewHolder(View itemView, CriteriaActivity activity)
     {
         super(itemView);
         this.activity = activity;
@@ -39,21 +39,22 @@ public class GroupViewHolder extends RecyclerView.ViewHolder implements View.OnC
         this.name = name;
     }
 
-    public Group getGroup()
+    public Criterion getCriterion()
     {
-        return group;
+        return criterion;
     }
 
-    public void setGroup(Group group)
+    public void setCriterion(Criterion criterion)
     {
-        this.group = group;
-        this.name.setText(group.getName());
+        this.criterion = criterion;
+        this.name.setText(criterion.getName());
     }
 
     @Override
     public void onClick(View v)
     {
-        PreferencesProvider.setGroup(this.group);
+        PreferencesProvider.setCriteriaType(activity.getSelectedCriteriaType());
+        PreferencesProvider.setCriterion(this.criterion);
 
         Intent intent = new Intent(activity, TimetableActivity.class);
         activity.startActivity(intent);
