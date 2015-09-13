@@ -60,9 +60,8 @@ public class DayViewHolder extends RecyclerView.ViewHolder
             String dayOfWeek = DateUtils.getDayOfWeekName(DateUtils.toDate(day.getDate()));
             this.dayOfWeek.setText(dayOfWeek);
 
-
             lessonsList.setLayoutManager(new InnerRecyclerLayoutManager(context));
-            lessonsList.setAdapter(new LessonTileAdapter(day.getLessons()));
+            lessonsList.setAdapter(new LessonTileAdapter(context, day.getLessons()));
         }
         catch (ParseException e)
         {

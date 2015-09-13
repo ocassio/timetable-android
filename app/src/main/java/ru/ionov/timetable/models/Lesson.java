@@ -10,19 +10,22 @@ public class Lesson implements Serializable
     private String name;
     private String teacher;
     private String type;
+    private String group;
+
     private TimeRange time;
 
     public Lesson()
     {
     }
 
-    public Lesson(String number, String room, String name, String teacher, String type, TimeRange time)
+    public Lesson(String number, String room, String name, String teacher, String type, String group, TimeRange time)
     {
         this.number = number;
         this.room = room;
         this.name = name;
         this.teacher = teacher;
         this.type = type;
+        this.group = group;
         this.time = time;
     }
 
@@ -33,8 +36,7 @@ public class Lesson implements Serializable
         this.teacher = params[2];
         this.type = params[3];
         this.name = params[4];
-
-        
+        this.group = params[5];
     }
 
     public Lesson(List<String> params)
@@ -90,6 +92,16 @@ public class Lesson implements Serializable
     public void setType(String type)
     {
         this.type = type;
+    }
+
+    public String getGroup()
+    {
+        return group;
+    }
+
+    public void setGroup(String group)
+    {
+        this.group = group;
     }
 
     public TimeRange getTime()

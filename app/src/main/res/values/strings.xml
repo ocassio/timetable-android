@@ -4,7 +4,7 @@
     <string name="title_activity_date">Выбор даты</string>
 
     <string name="action_search">Поиск</string>
-    <string name="action_select_group">Выбрать группу</string>
+    <string name="action_select_criterion">Выбрать критерий</string>
     <string name="action_select_date">Выбрать дату</string>
 
     <string name="connection_problems_message">Не удалось загрузить данные</string>

@@ -10,9 +10,9 @@ public class LessonViewHolder extends RecyclerView.ViewHolder
 {
     private TextView number;
     private TextView name;
-    private TextView room;
+    private TextView upperLabel;
     private TextView type;
-    private TextView teacher;
+    private TextView lowerLabel;
     private TextView timeFrom;
     private TextView timeTo;
 
@@ -21,9 +21,9 @@ public class LessonViewHolder extends RecyclerView.ViewHolder
         super(itemView);
         number = (TextView) itemView.findViewById(R.id.lessonNum);
         name = (TextView) itemView.findViewById(R.id.lessonName);
-        room = (TextView) itemView.findViewById(R.id.lessonRoom);
+        upperLabel = (TextView) itemView.findViewById(R.id.upperLabel);
         type = (TextView) itemView.findViewById(R.id.lessonType);
-        teacher = (TextView) itemView.findViewById(R.id.lessonTeacher);
+        lowerLabel = (TextView) itemView.findViewById(R.id.lowerLabel);
         timeFrom = (TextView) itemView.findViewById(R.id.lessonTimeFrom);
         timeTo = (TextView) itemView.findViewById(R.id.lessonTimeTo);
     }
@@ -48,14 +48,14 @@ public class LessonViewHolder extends RecyclerView.ViewHolder
         this.name = name;
     }
 
-    public TextView getRoom()
+    public TextView getUpperLabel()
     {
-        return room;
+        return upperLabel;
     }
 
-    public void setRoom(TextView room)
+    public void setUpperLabel(TextView upperLabel)
     {
-        this.room = room;
+        this.upperLabel = upperLabel;
     }
 
     public TextView getType()
@@ -68,14 +68,14 @@ public class LessonViewHolder extends RecyclerView.ViewHolder
         this.type = type;
     }
 
-    public TextView getTeacher()
+    public TextView getLowerLabel()
     {
-        return teacher;
+        return lowerLabel;
     }
 
-    public void setTeacher(TextView teacher)
+    public void setLowerLabel(TextView lowerLabel)
     {
-        this.teacher = teacher;
+        this.lowerLabel = lowerLabel;
     }
 
     public TextView getTimeFrom()

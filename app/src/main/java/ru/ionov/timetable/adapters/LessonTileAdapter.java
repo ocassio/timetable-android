@@ -1,5 +1,7 @@
 package ru.ionov.timetable.adapters;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -10,14 +12,18 @@ import java.util.List;
 
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.models.Lesson;
+import ru.ionov.timetable.providers.PreferencesProvider;
 import ru.ionov.timetable.viewholders.LessonViewHolder;
 
 public class LessonTileAdapter extends RecyclerView.Adapter<LessonViewHolder>
 {
+    private final Context context;
+
     private List<Lesson> lessons;
 
-    public LessonTileAdapter(List<Lesson> lessons)
+    public LessonTileAdapter(Context context, List<Lesson> lessons)
     {
+        this.context = context;
         this.lessons = lessons;
     }
 
@@ -42,17 +48,9 @@ public class LessonTileAdapter extends RecyclerView.Adapter<LessonViewHolder>
             holder.getTimeTo().setText(lesson.getTime().getTo());
         }
         holder.getName().setText(lesson.getName());
-        holder.getRoom().setText(lesson.getRoom());
         holder.getType().setText(lesson.getType());
 
-        if (!TextUtils.isEmpty(lesson.getTeacher()))
-        {
-            holder.getTeacher().setText(lesson.getTeacher());
-        }
-        else
-        {
-            holder.getTeacher().setText("-");
-        }
+        resolveUpperAndLowerLabels(holder, lesson);
     }
 
     @Override
@@ -65,5 +63,36 @@ public class LessonTileAdapter extends RecyclerView.Adapter<LessonViewHolder>
     {
         this.lessons = lessons;
         notifyDataSetChanged();
+    }
+
+    private void resolveUpperAndLowerLabels(LessonViewHolder holder, Lesson lesson)
+    {
+        int criteriaType = PreferencesProvider.getCriteriaType();
+        Resources resources = context.getResources();
+
+        if (criteriaType == resources.getInteger(R.integer.criteriaTypeGroup))
+        {
+            holder.getUpperLabel().setText(lesson.getRoom());
+            holder.getLowerLabel().setText(lesson.getTeacher());
+        }
+        else if (criteriaType == resources.getInteger(R.integer.criteriaTypeTeacher))
+        {
+            holder.getUpperLabel().setText(lesson.getRoom());
+            holder.getLowerLabel().setText(lesson.getGroup());
+        }
+        else if (criteriaType == resources.getInteger(R.integer.criteriaTypeRoom))
+        {
+            holder.getUpperLabel().setText(lesson.getGroup());
+            holder.getLowerLabel().setText(lesson.getTeacher());
+        }
+
+        if (TextUtils.isEmpty(holder.getUpperLabel().getText()))
+        {
+            holder.getUpperLabel().setText("-");
+        }
+        if (TextUtils.isEmpty(holder.getLowerLabel().getText()))
+        {
+            holder.getLowerLabel().setText("-");
+        }
     }
 }

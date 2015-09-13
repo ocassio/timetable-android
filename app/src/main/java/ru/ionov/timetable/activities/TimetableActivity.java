@@ -62,7 +62,7 @@ public class TimetableActivity extends ActionBarActivity
 
         switch (id)
         {
-            case R.id.action_select_group:
+            case R.id.action_select_criterion:
                 startActivity(new Intent(this, CriteriaActivity.class));
                 return true;
 
