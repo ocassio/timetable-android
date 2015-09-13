@@ -2,10 +2,12 @@ package ru.ionov.timetable.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ru.ionov.timetable.R;
@@ -17,11 +19,13 @@ public class DayCardAdapter extends RecyclerView.Adapter<DayViewHolder>
     private Context context;
 
     private List<Day> days;
+    private List<Day> filteredDays;
 
     public DayCardAdapter(Context context, List<Day> days)
     {
         this.context = context;
         this.days = days;
+        this.filteredDays = new ArrayList<>(days);
     }
 
     @Override
@@ -36,24 +40,48 @@ public class DayCardAdapter extends RecyclerView.Adapter<DayViewHolder>
     @Override
     public void onBindViewHolder(DayViewHolder holder, int position)
     {
-        holder.setDay(days.get(position));
+        holder.setDay(filteredDays.get(position));
     }
 
     @Override
     public int getItemCount()
     {
-        return days.size();
+        return filteredDays.size();
     }
 
     @Override
     public long getItemId(int position)
     {
-        return days.get(position).getDate().hashCode();
+        return filteredDays.get(position).getDate().hashCode();
     }
 
     public void reloadData(List<Day> days)
     {
         this.days = days;
+        this.filteredDays = new ArrayList<>(days);
+        notifyDataSetChanged();
+    }
+
+    public void filterData(String query)
+    {
+        if (!TextUtils.isEmpty(query))
+        {
+            filteredDays.clear();
+            query = query.toLowerCase();
+
+            for (Day day : days)
+            {
+                if (day.contains(query))
+                {
+                    filteredDays.add(day);
+                }
+            }
+        }
+        else
+        {
+            filteredDays = new ArrayList<>(days);
+        }
+
         notifyDataSetChanged();
     }
 }

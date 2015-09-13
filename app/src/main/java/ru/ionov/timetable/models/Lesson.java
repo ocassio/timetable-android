@@ -114,6 +114,13 @@ public class Lesson implements Serializable
         this.time = time;
     }
 
+    public boolean contains(String query)
+    {
+        return (room.toLowerCase().contains(query) || name.toLowerCase().contains(query) ||
+                teacher.toLowerCase().contains(query) || type.toLowerCase().contains(query) ||
+                group.toLowerCase().contains(query));
+    }
+
     @Override
     public String toString()
     {

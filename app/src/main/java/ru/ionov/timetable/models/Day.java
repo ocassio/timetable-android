@@ -54,6 +54,21 @@ public class Day implements Serializable
         getLessons().add(lesson);
     }
 
+    public boolean contains(String query)
+    {
+        if (this.getDate().toLowerCase().contains(query)) return true;
+
+        for (Lesson lesson : lessons)
+        {
+            if (lesson.contains(query))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Override
     public String toString()
     {
