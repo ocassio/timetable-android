@@ -115,6 +115,10 @@ public final class DataProvider
                 .post();
 
         Elements elements = document.select("#send td.hours");
+        if (elements.isEmpty())
+        {
+            throw new IOException("Timetable is missing on loaded page");
+        }
 
         return getDays(elements);
     }
