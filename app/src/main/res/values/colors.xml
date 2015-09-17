@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="primary" type="color">#3F51B5</item>
-    <!--<item name="primary" type="color">#FF9800</item>-->
-    <!--<item name="primaryDark" type="color">#F57C00</item>-->
     <item name="primaryDark" type="color">#303F9F</item>
     <item name="primaryLight" type="color">#5C6BC0</item>
+
     <item name="accent" type="color">#E91E63</item>
-    <!--<item name="accent" type="color">#E65100</item>-->
+    <item name="accentLight" type="color">#EC407A</item>
+
+    <item name="additional" type="color">#03A9F4</item>
 </resources>

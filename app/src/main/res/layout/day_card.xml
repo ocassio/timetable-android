@@ -17,6 +17,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/dayHeader"
             android:background="@color/primaryLight"
             android:orientation="horizontal"
             android:layout_width="match_parent"

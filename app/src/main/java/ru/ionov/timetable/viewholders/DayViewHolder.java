@@ -3,9 +3,11 @@ package ru.ionov.timetable.viewholders;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.adapters.LessonTileAdapter;
@@ -17,6 +19,7 @@ public class DayViewHolder extends RecyclerView.ViewHolder
 {
     private Context context;
 
+    private LinearLayout header;
     private TextView date;
     private TextView dayOfWeek;
     private RecyclerView lessonsList;
@@ -29,6 +32,7 @@ public class DayViewHolder extends RecyclerView.ViewHolder
 
         this.context = context;
 
+        header = (LinearLayout) itemView.findViewById(R.id.dayHeader);
         date = (TextView) itemView.findViewById(R.id.dayDate);
         dayOfWeek = (TextView) itemView.findViewById(R.id.dayDayOfWeek);
 
@@ -57,7 +61,11 @@ public class DayViewHolder extends RecyclerView.ViewHolder
 
         try
         {
-            String dayOfWeek = DateUtils.getDayOfWeekName(DateUtils.toDate(day.getDate()));
+            Date date = DateUtils.toDate(day.getDate());
+            int colorId = DateUtils.isToday(date) ? R.color.accentLight : R.color.primaryLight;
+            header.setBackgroundColor(context.getResources().getColor(colorId));
+
+            String dayOfWeek = DateUtils.getDayOfWeekName(date);
             this.dayOfWeek.setText(dayOfWeek);
 
             lessonsList.setLayoutManager(new InnerRecyclerLayoutManager(context));
