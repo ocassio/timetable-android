@@ -15,6 +15,7 @@ public class LessonViewHolder extends RecyclerView.ViewHolder
     private TextView lowerLabel;
     private TextView timeFrom;
     private TextView timeTo;
+    private TextView note;
 
     public LessonViewHolder(View itemView)
     {
@@ -26,6 +27,7 @@ public class LessonViewHolder extends RecyclerView.ViewHolder
         lowerLabel = (TextView) itemView.findViewById(R.id.lowerLabel);
         timeFrom = (TextView) itemView.findViewById(R.id.lessonTimeFrom);
         timeTo = (TextView) itemView.findViewById(R.id.lessonTimeTo);
+        note = (TextView) itemView.findViewById(R.id.lessonNote);
     }
 
     public TextView getNumber()
@@ -96,5 +98,15 @@ public class LessonViewHolder extends RecyclerView.ViewHolder
     public void setTimeTo(TextView timeTo)
     {
         this.timeTo = timeTo;
+    }
+
+    public TextView getNote()
+    {
+        return note;
+    }
+
+    public void setNote(TextView note)
+    {
+        this.note = note;
     }
 }

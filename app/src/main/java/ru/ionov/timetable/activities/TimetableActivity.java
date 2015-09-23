@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -18,7 +18,7 @@ import ru.ionov.timetable.listeners.DaysSearchListener;
 import ru.ionov.timetable.listeners.TimetableSwipeRefreshListener;
 import ru.ionov.timetable.providers.CacheProvider;
 
-public class TimetableActivity extends ActionBarActivity
+public class TimetableActivity extends AppCompatActivity
 {
     private DayCardAdapter dayCardAdapter;
 

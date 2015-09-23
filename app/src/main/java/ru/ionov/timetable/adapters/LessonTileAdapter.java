@@ -50,6 +50,12 @@ public class LessonTileAdapter extends RecyclerView.Adapter<LessonViewHolder>
         holder.getName().setText(lesson.getName());
         holder.getType().setText(lesson.getType());
 
+        if (!TextUtils.isEmpty(lesson.getNote()))
+        {
+            holder.getNote().setVisibility(View.VISIBLE);
+            holder.getNote().setText(lesson.getNote());
+        }
+
         resolveUpperAndLowerLabels(holder, lesson);
     }
 

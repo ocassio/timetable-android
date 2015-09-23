@@ -77,11 +77,21 @@
             android:textSize="16sp"/>
 
         <ru.ionov.timetable.views.RobotoTextView
+            android:id="@+id/lessonNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/abc_primary_text_material_light"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <ru.ionov.timetable.views.RobotoTextView
             android:id="@+id/lowerLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/abc_secondary_text_material_light"
             android:textSize="14sp"/>
+
+
 
     </LinearLayout>
 

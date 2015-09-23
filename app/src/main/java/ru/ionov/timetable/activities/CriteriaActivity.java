@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -24,7 +24,7 @@ import ru.ionov.timetable.listeners.CriteriaSwipeRefreshListener;
 import ru.ionov.timetable.models.Criterion;
 import ru.ionov.timetable.providers.PreferencesProvider;
 
-public class CriteriaActivity extends ActionBarActivity
+public class CriteriaActivity extends AppCompatActivity
 {
     private SwipeRefreshLayout swipeRefresh;
     private CriterionTileAdapter criterionTileAdapter;

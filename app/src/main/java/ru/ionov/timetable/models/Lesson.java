@@ -11,6 +11,7 @@ public class Lesson implements Serializable
     private String teacher;
     private String type;
     private String group;
+    private String note;
 
     private TimeRange time;
 
@@ -18,7 +19,7 @@ public class Lesson implements Serializable
     {
     }
 
-    public Lesson(String number, String room, String name, String teacher, String type, String group, TimeRange time)
+    public Lesson(String number, String room, String name, String teacher, String type, String group, String note, TimeRange time)
     {
         this.number = number;
         this.room = room;
@@ -27,6 +28,7 @@ public class Lesson implements Serializable
         this.type = type;
         this.group = group;
         this.time = time;
+        this.note = note;
     }
 
     public Lesson(String[] params)
@@ -37,6 +39,7 @@ public class Lesson implements Serializable
         this.type = params[3];
         this.name = params[4];
         this.group = params[5];
+        this.note = params[6];
     }
 
     public Lesson(List<String> params)
@@ -114,11 +117,26 @@ public class Lesson implements Serializable
         this.time = time;
     }
 
+    public String getNote()
+    {
+        return note;
+    }
+
+    public void setNote(String note)
+    {
+        this.note = note;
+    }
+
     public boolean contains(String query)
     {
-        return (room.toLowerCase().contains(query) || name.toLowerCase().contains(query) ||
-                teacher.toLowerCase().contains(query) || type.toLowerCase().contains(query) ||
-                group.toLowerCase().contains(query));
+        return (isNonNullAndContains(room, query) || isNonNullAndContains(name, query)  ||
+                isNonNullAndContains(teacher, query) || isNonNullAndContains(type, query)  ||
+                isNonNullAndContains(group, query) || isNonNullAndContains(note, query));
+    }
+
+    private boolean isNonNullAndContains(String target, String value)
+    {
+        return (target != null && target.toLowerCase().contains(value));
     }
 
     @Override
