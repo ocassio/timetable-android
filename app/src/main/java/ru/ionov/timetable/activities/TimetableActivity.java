@@ -35,6 +35,8 @@ public class TimetableActivity extends AppCompatActivity
         dayCardAdapter.setHasStableIds(true);
         cardList.setAdapter(dayCardAdapter);
 
+        final TimetableActivity activity = this;
+
         final SwipeRefreshLayout swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         swipeRefresh.setOnRefreshListener(new TimetableSwipeRefreshListener(this, swipeRefresh, dayCardAdapter));
         swipeRefresh.post(new Runnable()
@@ -43,10 +45,9 @@ public class TimetableActivity extends AppCompatActivity
             public void run()
             {
                 swipeRefresh.setRefreshing(true);
+                new LoadTimetableTask(activity, swipeRefresh, dayCardAdapter).execute();
             }
         });
-
-        new LoadTimetableTask(this, swipeRefresh, dayCardAdapter).execute();
     }
 
     @Override
