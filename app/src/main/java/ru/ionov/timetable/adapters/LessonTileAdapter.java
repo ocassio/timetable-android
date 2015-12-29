@@ -17,6 +17,9 @@ import ru.ionov.timetable.viewholders.LessonViewHolder;
 
 public class LessonTileAdapter extends RecyclerView.Adapter<LessonViewHolder>
 {
+    private static final int TYPE_DEFAULT = 0;
+    private static final int TYPE_WITH_NOTE = 1;
+
     private final Context context;
 
     private List<Lesson> lessons;
@@ -30,8 +33,18 @@ public class LessonTileAdapter extends RecyclerView.Adapter<LessonViewHolder>
     @Override
     public LessonViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
+        int layoutResource;
+        switch (viewType)
+        {
+            case TYPE_WITH_NOTE:
+                layoutResource = R.layout.lesson_with_note_tile;
+                break;
+
+            default:
+                layoutResource = R.layout.lesson_tile;
+        }
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.lesson_tile, parent, false);
+                .inflate(layoutResource, parent, false);
 
         return new LessonViewHolder(view);
     }
@@ -50,13 +63,23 @@ public class LessonTileAdapter extends RecyclerView.Adapter<LessonViewHolder>
         holder.getName().setText(lesson.getName());
         holder.getType().setText(lesson.getType());
 
-        if (!TextUtils.isEmpty(lesson.getNote()))
+        if (getItemViewType(position) == TYPE_WITH_NOTE)
         {
             holder.getNote().setVisibility(View.VISIBLE);
             holder.getNote().setText(lesson.getNote());
         }
 
         resolveUpperAndLowerLabels(holder, lesson);
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        if (!TextUtils.isEmpty(lessons.get(position).getNote()))
+        {
+            return TYPE_WITH_NOTE;
+        }
+        return TYPE_DEFAULT;
     }
 
     @Override
