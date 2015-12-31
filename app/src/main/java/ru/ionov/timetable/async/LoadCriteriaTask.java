@@ -12,6 +12,7 @@ import ru.ionov.timetable.R;
 import ru.ionov.timetable.adapters.CriterionTileAdapter;
 import ru.ionov.timetable.models.Criterion;
 import ru.ionov.timetable.providers.DataProvider;
+import ru.ionov.timetable.providers.PreferencesProvider;
 
 public class LoadCriteriaTask extends AsyncTask<Void, Void, List<Criterion>>
 {
@@ -59,7 +60,8 @@ public class LoadCriteriaTask extends AsyncTask<Void, Void, List<Criterion>>
     {
         if (criteria != null && !criteria.isEmpty())
         {
-            criterionTileAdapter.reloadData(criteria);
+            List<Criterion> recentCriteria = PreferencesProvider.getRecentCriteria(criteriaType);
+            criterionTileAdapter.reloadData(criteria, recentCriteria);
         }
         else
         {

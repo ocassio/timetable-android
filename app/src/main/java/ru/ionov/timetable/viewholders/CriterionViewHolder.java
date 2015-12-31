@@ -53,8 +53,14 @@ public class CriterionViewHolder extends RecyclerView.ViewHolder implements View
     @Override
     public void onClick(View v)
     {
+        if (criterion.getId() == null)
+        {
+            return;
+        }
+
         PreferencesProvider.setCriteriaType(activity.getSelectedCriteriaType());
         PreferencesProvider.setCriterion(this.criterion);
+        PreferencesProvider.addRecentCriterion(activity.getSelectedCriteriaType(), this.criterion);
 
         Intent intent = new Intent(activity, TimetableActivity.class);
         activity.startActivity(intent);

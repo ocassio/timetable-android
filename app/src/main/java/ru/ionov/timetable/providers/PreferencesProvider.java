@@ -7,6 +7,10 @@ import android.preference.PreferenceManager;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.models.Criterion;
@@ -22,8 +26,11 @@ public final class PreferencesProvider
     private static final String CRITERION_KEY = "criterion";
     private static final String DATE_TYPE_KEY = "dateType";
     private static final String DATE_RANGE_KEY = "dateRange";
+    private static final String RECENT_CRITERIA_KEY = "recentCriteria";
 
     private static final String MISSING_CONTEXT_ERROR_MSG = "You must set application context before using other CacheProvider methods";
+
+    private static final int RECENT_CRITERIA_CAPACITY = 3;
 
     private PreferencesProvider() {}
 
@@ -205,5 +212,81 @@ public final class PreferencesProvider
         }
 
         throw new IllegalArgumentException("Unknown date type");
+    }
+
+    public static void addRecentCriterion(int criteriaType, Criterion criterion)
+    {
+        if (context == null)
+        {
+            throw new IllegalStateException(MISSING_CONTEXT_ERROR_MSG);
+        }
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String recentCriteriaJSON = preferences.getString(RECENT_CRITERIA_KEY, null);
+
+        Map<Integer, List<Criterion>> recentCriteria = null;
+        try
+        {
+            recentCriteria = JSONUtils.toListsMap(recentCriteriaJSON, Integer.class, Criterion.class);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        if (recentCriteria == null)
+        {
+            recentCriteria = new HashMap<>();
+        }
+
+        if (recentCriteria.get(criteriaType) == null)
+        {
+            recentCriteria.put(criteriaType, new ArrayList<Criterion>());
+        }
+
+        List<Criterion> criteria = recentCriteria.get(criteriaType);
+        criteria.remove(criterion);
+        criteria.add(0, criterion);
+        recentCriteria.put(criteriaType, criteria.subList(0, Math.min(criteria.size(), RECENT_CRITERIA_CAPACITY)));
+
+        try
+        {
+            recentCriteriaJSON = JSONUtils.toJSONString(recentCriteria);
+            preferences.edit()
+                       .putString(RECENT_CRITERIA_KEY, recentCriteriaJSON)
+                       .apply();
+        }
+        catch (JsonProcessingException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<Criterion> getRecentCriteria(int criteriaType)
+    {
+        if (context == null)
+        {
+            throw new IllegalStateException(MISSING_CONTEXT_ERROR_MSG);
+        }
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String recentCriteriaJSON = preferences.getString(RECENT_CRITERIA_KEY, null);
+
+        Map<Integer, List<Criterion>> recentCriteria = null;
+        try
+        {
+            recentCriteria = JSONUtils.toListsMap(recentCriteriaJSON, Integer.class, Criterion.class);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        if (recentCriteria == null || recentCriteria.get(criteriaType) == null)
+        {
+            return new ArrayList<>();
+        }
+
+        return recentCriteria.get(criteriaType);
     }
 }

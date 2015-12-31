@@ -23,6 +23,9 @@
     <string name="ok">OK</string>
     <string name="cancel">Отмена</string>
 
+    <string name="recent">Недавние</string>
+    <string name="all">Все</string>
+
     <array name="daysOfWeek">
         <item>Понедельник</item>
         <item>Вторник</item>

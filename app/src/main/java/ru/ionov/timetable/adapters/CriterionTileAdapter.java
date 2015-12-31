@@ -16,23 +16,46 @@ import ru.ionov.timetable.viewholders.CriterionViewHolder;
 
 public class CriterionTileAdapter extends RecyclerView.Adapter<CriterionViewHolder>
 {
+    private static final int TYPE_DEFAULT = 0;
+    private static final int TYPE_GROUP_HEADER = 1;
+
     private CriteriaActivity activity;
     private List<Criterion> criteria;
+    private List<Criterion> recentCriteria;
     private List<Criterion> filteredCriteria;
 
     public CriterionTileAdapter(CriteriaActivity activity, List<Criterion> criteria)
     {
+        this(activity, criteria, null);
+    }
+
+    public CriterionTileAdapter(CriteriaActivity activity, List<Criterion> criteria, List<Criterion> recentCriteria)
+    {
         this.activity = activity;
         this.criteria = criteria;
+        this.recentCriteria = recentCriteria;
 
-        filteredCriteria = new ArrayList<>(criteria);
+        filteredCriteria = getCombinedCriteria();
     }
 
     @Override
     public CriterionViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
+        int layoutResource;
+
+        switch (viewType)
+        {
+            case TYPE_GROUP_HEADER:
+                layoutResource = R.layout.group_header_tile;
+                break;
+
+            default:
+                layoutResource = R.layout.criterion_tile;
+                break;
+        }
+
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.group_tile, parent, false);
+                .inflate(layoutResource, parent, false);
 
         return new CriterionViewHolder(view, activity);
     }
@@ -44,6 +67,16 @@ public class CriterionTileAdapter extends RecyclerView.Adapter<CriterionViewHold
     }
 
     @Override
+    public int getItemViewType(int position)
+    {
+        if (filteredCriteria.get(position).getId() == null)
+        {
+            return TYPE_GROUP_HEADER;
+        }
+        return TYPE_DEFAULT;
+    }
+
+    @Override
     public int getItemCount()
     {
         return filteredCriteria.size();
@@ -51,9 +84,15 @@ public class CriterionTileAdapter extends RecyclerView.Adapter<CriterionViewHold
 
     public void reloadData(List<Criterion> criteria)
     {
-        this.criteria = criteria;
+        reloadData(criteria, null);
+    }
 
-        filteredCriteria = new ArrayList<>(criteria);
+    public void reloadData(List<Criterion> criteria, List<Criterion> recentCriteria)
+    {
+        this.criteria = criteria;
+        this.recentCriteria = recentCriteria;
+
+        filteredCriteria = getCombinedCriteria();
 
         notifyDataSetChanged();
     }
@@ -75,9 +114,25 @@ public class CriterionTileAdapter extends RecyclerView.Adapter<CriterionViewHold
         }
         else
         {
-            filteredCriteria = new ArrayList<>(criteria);
+            filteredCriteria = getCombinedCriteria();
         }
 
         notifyDataSetChanged();
+    }
+
+    private List<Criterion> getCombinedCriteria()
+    {
+        List<Criterion> combinedCriteria = new ArrayList<>();
+
+        if (recentCriteria != null && !recentCriteria.isEmpty())
+        {
+            combinedCriteria.add(new Criterion(activity.getResources().getString(R.string.recent)));
+            combinedCriteria.addAll(recentCriteria);
+            combinedCriteria.add(new Criterion(activity.getResources().getString(R.string.all)));
+        }
+
+        combinedCriteria.addAll(criteria);
+
+        return combinedCriteria;
     }
 }
