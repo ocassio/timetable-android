@@ -1,9 +1,22 @@
-<fragment
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ru.ionov.timetable.activities.DateActivity"
-    android:id="@+id/dateFragment"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:name="ru.ionov.timetable.fragments.DateFragment"
-    tools:layout="@layout/fragment_date"/>
+    android:background="@color/background_material_light">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <fragment
+            android:id="@+id/dateFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="ru.ionov.timetable.fragments.DateFragment"
+            tools:layout="@layout/fragment_date"/>
+
+    </ScrollView>
+
+</FrameLayout>
+

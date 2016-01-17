@@ -26,6 +26,9 @@
     <string name="recent">Недавние</string>
     <string name="all">Все</string>
 
+    <string name="range">Диапазон</string>
+    <string name="dates">Даты</string>
+
     <array name="daysOfWeek">
         <item>Понедельник</item>
         <item>Вторник</item>

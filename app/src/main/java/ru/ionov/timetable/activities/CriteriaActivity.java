@@ -80,7 +80,7 @@ public class CriteriaActivity extends AppCompatActivity
         criteriaTypeSpinner = (Spinner) findViewById(R.id.criteria_type_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(actionBar.getThemedContext(),
                 R.array.criteria, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.spinner_layout_item);
         criteriaTypeSpinner.setAdapter(adapter);
 
         int criteriaType = PreferencesProvider.getCriteriaType();
