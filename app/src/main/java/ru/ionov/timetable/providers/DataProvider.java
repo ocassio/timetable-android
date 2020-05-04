@@ -5,26 +5,16 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import ru.ionov.timetable.models.*;
+import ru.ionov.timetable.utils.DateUtils;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import ru.ionov.timetable.models.Criterion;
-import ru.ionov.timetable.models.DateRange;
-import ru.ionov.timetable.models.Day;
-import ru.ionov.timetable.models.Lesson;
-import ru.ionov.timetable.models.TimeRange;
-import ru.ionov.timetable.utils.DateUtils;
+import java.util.*;
 
 public final class DataProvider
 {
-    private static final String TIMETABLE_URL = "http://www.tolgas.ru/services/raspisanie/";
+    private static final String TIMETABLE_URL = "https://www.tolgas.ru/services/raspisanie/";
     private static final String POST_DATA_CHARSET = "windows-1251";
     private static final int CONNECTION_TIMEOUT = 15000;
 

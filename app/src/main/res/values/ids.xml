@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="dateSelectionTypeToday" type="id">0</item>
-    <item name="dateSelectionTypeSevenDays" type="id">1</item>
-    <item name="dateSelectionTypeWeek" type="id">3</item>
-    <item name="dateSelectionTypeNextWeek" type="id">4</item>
-    <item name="dateSelectionTypeMonth" type="id">5</item>
-    <item name="dateSelectionTypeCustom" type="id">6</item>
+    <item name="dateSelectionTypeToday" type="id"/>
+    <item name="dateSelectionTypeSevenDays" type="id"/>
+    <item name="dateSelectionTypeWeek" type="id"/>
+    <item name="dateSelectionTypeNextWeek" type="id"/>
+    <item name="dateSelectionTypeMonth" type="id"/>
+    <item name="dateSelectionTypeCustom" type="id"/>
 </resources>

@@ -1,27 +1,25 @@
 package ru.ionov.timetable.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import com.rey.material.app.DatePickerDialog;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
-
-import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
-
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.models.DateRange;
 import ru.ionov.timetable.providers.PreferencesProvider;
 import ru.ionov.timetable.utils.DateUtils;
+
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 
 public class DateFragment extends Fragment
 {

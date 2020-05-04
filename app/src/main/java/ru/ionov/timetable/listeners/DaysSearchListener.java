@@ -1,7 +1,6 @@
 package ru.ionov.timetable.listeners;
 
-import android.support.v7.widget.SearchView;
-
+import androidx.appcompat.widget.SearchView;
 import ru.ionov.timetable.adapters.DayCardAdapter;
 
 public class DaysSearchListener implements SearchView.OnQueryTextListener

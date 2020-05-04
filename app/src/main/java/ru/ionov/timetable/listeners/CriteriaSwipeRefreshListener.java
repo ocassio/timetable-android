@@ -1,7 +1,6 @@
 package ru.ionov.timetable.listeners;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import ru.ionov.timetable.activities.CriteriaActivity;
 import ru.ionov.timetable.adapters.CriterionTileAdapter;
 import ru.ionov.timetable.async.LoadCriteriaTask;

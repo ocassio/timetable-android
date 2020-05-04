@@ -1,9 +1,8 @@
 package ru.ionov.timetable.viewholders;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
+import androidx.recyclerview.widget.RecyclerView;
 import ru.ionov.timetable.R;
 
 public class LessonViewHolder extends RecyclerView.ViewHolder

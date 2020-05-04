@@ -1,10 +1,9 @@
 package ru.ionov.timetable.viewholders;
 
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
+import androidx.recyclerview.widget.RecyclerView;
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.activities.CriteriaActivity;
 import ru.ionov.timetable.activities.TimetableActivity;

@@ -2,17 +2,16 @@ package ru.ionov.timetable.async;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.List;
-
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.adapters.CriterionTileAdapter;
 import ru.ionov.timetable.models.Criterion;
 import ru.ionov.timetable.providers.DataProvider;
 import ru.ionov.timetable.providers.PreferencesProvider;
+
+import java.io.IOException;
+import java.util.List;
 
 public class LoadCriteriaTask extends AsyncTask<Void, Void, List<Criterion>>
 {

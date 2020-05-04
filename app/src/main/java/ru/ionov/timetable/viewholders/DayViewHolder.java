@@ -1,19 +1,18 @@
 package ru.ionov.timetable.viewholders;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.text.ParseException;
-import java.util.Date;
-
+import androidx.recyclerview.widget.RecyclerView;
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.adapters.LessonTileAdapter;
 import ru.ionov.timetable.models.Day;
 import ru.ionov.timetable.utils.DateUtils;
 import ru.ionov.timetable.views.InnerRecyclerLayoutManager;
+
+import java.text.ParseException;
+import java.util.Date;
 
 public class DayViewHolder extends RecyclerView.ViewHolder
 {

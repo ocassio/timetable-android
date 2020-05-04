@@ -1,21 +1,18 @@
 package ru.ionov.timetable.activities;
 
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
-import java.util.ArrayList;
-
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.adapters.CriterionTileAdapter;
 import ru.ionov.timetable.async.LoadCriteriaTask;
@@ -23,6 +20,8 @@ import ru.ionov.timetable.listeners.CriteriaSearchListener;
 import ru.ionov.timetable.listeners.CriteriaSwipeRefreshListener;
 import ru.ionov.timetable.models.Criterion;
 import ru.ionov.timetable.providers.PreferencesProvider;
+
+import java.util.ArrayList;
 
 public class CriteriaActivity extends AppCompatActivity
 {

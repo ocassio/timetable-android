@@ -1,7 +1,6 @@
 package ru.ionov.timetable.listeners;
 
-import android.support.v7.widget.SearchView;
-
+import androidx.appcompat.widget.SearchView;
 import ru.ionov.timetable.adapters.CriterionTileAdapter;
 
 public class CriteriaSearchListener implements SearchView.OnQueryTextListener

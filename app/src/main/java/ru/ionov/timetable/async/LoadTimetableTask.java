@@ -2,18 +2,17 @@ package ru.ionov.timetable.async;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.List;
-
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import ru.ionov.timetable.R;
 import ru.ionov.timetable.adapters.DayCardAdapter;
 import ru.ionov.timetable.models.Day;
 import ru.ionov.timetable.providers.CacheProvider;
 import ru.ionov.timetable.providers.DataProvider;
 import ru.ionov.timetable.providers.PreferencesProvider;
+
+import java.io.IOException;
+import java.util.List;
 
 public class LoadTimetableTask extends AsyncTask<Void, Void, List<Day>>
 {

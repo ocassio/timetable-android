@@ -1,8 +1,7 @@
 package ru.ionov.timetable.listeners;
 
 import android.content.Context;
-import android.support.v4.widget.SwipeRefreshLayout;
-
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import ru.ionov.timetable.adapters.DayCardAdapter;
 import ru.ionov.timetable.async.LoadTimetableTask;
 
