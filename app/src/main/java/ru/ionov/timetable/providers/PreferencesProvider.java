@@ -3,20 +3,18 @@ package ru.ionov.timetable.providers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
+import ru.ionov.timetable.R;
+import ru.ionov.timetable.models.Criterion;
+import ru.ionov.timetable.models.DateRange;
+import ru.ionov.timetable.utils.DateUtils;
+import ru.ionov.timetable.utils.JSONUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import ru.ionov.timetable.R;
-import ru.ionov.timetable.models.Criterion;
-import ru.ionov.timetable.models.DateRange;
-import ru.ionov.timetable.utils.DateUtils;
-import ru.ionov.timetable.utils.JSONUtils;
 
 public final class PreferencesProvider
 {
@@ -211,7 +209,8 @@ public final class PreferencesProvider
                 return getCustomDateRange();
         }
 
-        throw new IllegalArgumentException("Unknown date type");
+        setDateType(R.id.dateSelectionTypeSevenDays);
+        return DateUtils.getSevenDays();
     }
 
     public static void addRecentCriterion(int criteriaType, Criterion criterion)
