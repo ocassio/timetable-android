@@ -15,7 +15,6 @@ import java.util.*;
 public final class DataProvider
 {
     private static final String TIMETABLE_URL = "https://www.tolgas.ru/services/raspisanie/";
-    private static final String POST_DATA_CHARSET = "windows-1251";
     private static final int CONNECTION_TIMEOUT = 15000;
 
     private static final String ATTR_VALUE = "value";
@@ -46,7 +45,7 @@ public final class DataProvider
         }
     };
 
-    private static Map<Integer, List<Criterion>> criteriaCaches = new HashMap<>();
+    private static final Map<Integer, List<Criterion>> criteriaCaches = new HashMap<>();
 
     private DataProvider() {}
 
@@ -94,7 +93,6 @@ public final class DataProvider
         int rel = PreferencesProvider.getCriteriaType();
 
         Document document = Jsoup.connect(TIMETABLE_URL)
-                .postDataCharset(POST_DATA_CHARSET)
                 .timeout(CONNECTION_TIMEOUT)
                 .method(Connection.Method.POST)
                 .data("rel", Integer.toString(rel))
