@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "ru.ionov.timetable"
         minSdkVersion 16
-        targetSdkVersion 29
-        versionCode 13
-        versionName "2.0.1"
+        targetSdkVersion 30
+        versionCode 14
+        versionName "2.0.2"
     }
     buildTypes {
         release {
@@ -43,10 +43,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-rc01'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     implementation 'com.github.rey5137:material:1.2.5'
 
