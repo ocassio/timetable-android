@@ -24,24 +24,13 @@ public final class DataProvider
     private static final List<TimeRange> TIME_RANGES = new ArrayList<TimeRange>()
     {
         {
-            add(new TimeRange("09:00", "10:35"));
-            add(new TimeRange("10:45", "12:20"));
-            add(new TimeRange("13:00", "14:35"));
-            add(new TimeRange("14:45", "16:20"));
-            add(new TimeRange("16:30", "18:05"));
-            add(new TimeRange("18:15", "19:50"));
-            add(new TimeRange("20:00", "21:35"));
-        }
-    };
-
-    private static final List<TimeRange> TIME_RANGES_SATURDAY = new ArrayList<TimeRange>()
-    {
-        {
             add(new TimeRange("08:30", "10:05"));
             add(new TimeRange("10:15", "11:50"));
             add(new TimeRange("12:35", "14:10"));
             add(new TimeRange("14:20", "15:55"));
             add(new TimeRange("16:05", "17:35"));
+            add(new TimeRange("17:45", "19:20"));
+            add(new TimeRange("19:30", "21:05"));
         }
     };
 
@@ -140,7 +129,7 @@ public final class DataProvider
                     }
 
                     Lesson lesson = new Lesson(params);
-                    setTimeRanges(date, lesson);
+                    setTimeRanges(lesson);
                     day.addLesson( lesson);
                 }
                 while (i < elements.size() && !DateUtils.isDate(elements.get(i).text()));
@@ -152,30 +141,12 @@ public final class DataProvider
         return days;
     }
 
-    private static void setTimeRanges(String stringDate, Lesson lesson)
+    private static void setTimeRanges(Lesson lesson)
     {
-        try
+        int lessonNum = Integer.parseInt(lesson.getNumber());
+        if (lessonNum <= TIME_RANGES.size())
         {
-            Date date = DateUtils.toDate(stringDate);
-            int lessonNum = Integer.parseInt(lesson.getNumber());
-            if (!DateUtils.equalsDayOfWeek(date, Calendar.SATURDAY))
-            {
-                if (lessonNum <= TIME_RANGES.size())
-                {
-                    lesson.setTime(TIME_RANGES.get(lessonNum - 1));
-                }
-            }
-            else
-            {
-                if (lessonNum <= TIME_RANGES_SATURDAY.size())
-                {
-                    lesson.setTime(TIME_RANGES_SATURDAY.get(lessonNum - 1));
-                }
-            }
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
+            lesson.setTime(TIME_RANGES.get(lessonNum - 1));
         }
     }
 }
