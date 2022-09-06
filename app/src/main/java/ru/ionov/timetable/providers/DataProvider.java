@@ -9,8 +9,9 @@ import ru.ionov.timetable.models.*;
 import ru.ionov.timetable.utils.DateUtils;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class DataProvider
 {
@@ -18,10 +19,13 @@ public final class DataProvider
     private static final int CONNECTION_TIMEOUT = 15000;
 
     private static final String ATTR_VALUE = "value";
+    private static final String TIME_RANGE_TR_SUBSTRING = "пара";
+
+    private static final Pattern TIME_PATTERN = Pattern.compile("\\d{2}[^\\d]\\d{2}");
 
     private static final int COL_COUNT = 7;
 
-    private static final List<TimeRange> TIME_RANGES = new ArrayList<TimeRange>()
+    private static final List<TimeRange> FALLBACK_TIME_RANGES = new ArrayList<TimeRange>()
     {
         {
             add(new TimeRange("08:30", "10:05"));
@@ -97,10 +101,53 @@ public final class DataProvider
             throw new IOException("Timetable is missing on loaded page");
         }
 
-        return getDays(elements);
+        List<TimeRange> timeRanges = getTimeRanges(document);
+
+        return getDays(elements, timeRanges);
     }
 
-    private static List<Day> getDays(Elements elements)
+    private static List<TimeRange> getTimeRanges(Document document) {
+        try {
+            List<TimeRange> result = new ArrayList<>();
+            Elements rowElements = document.select("form table tr");
+            for (Element element : rowElements) {
+                String text = element.text();
+                if (!text.contains(TIME_RANGE_TR_SUBSTRING)) {
+                    continue;
+                }
+
+                Matcher matcher = TIME_PATTERN.matcher(text);
+                List<String> times = new ArrayList<>();
+                while (matcher.find()) {
+                    times.add(matcher.group());
+                }
+                if (times.size() < 2) {
+                    continue;
+                }
+
+                TimeRange range = new TimeRange(
+                        normalizeTime(times.get(0)),
+                        normalizeTime(times.get(times.size() - 1))
+                );
+
+                result.add(range);
+            }
+
+            if (result.isEmpty()) {
+                return FALLBACK_TIME_RANGES;
+            }
+
+            return result;
+        } catch (Exception ignored) {
+            return FALLBACK_TIME_RANGES;
+        }
+    }
+
+    private static String normalizeTime(String time) {
+        return time.replaceAll("[^\\d]", ":");
+    }
+
+    private static List<Day> getDays(Elements elements, List<TimeRange> timeRanges)
     {
         List<Day> days = new ArrayList<>();
 
@@ -129,7 +176,7 @@ public final class DataProvider
                     }
 
                     Lesson lesson = new Lesson(params);
-                    setTimeRanges(lesson);
+                    setTimeRanges(lesson, timeRanges);
                     day.addLesson( lesson);
                 }
                 while (i < elements.size() && !DateUtils.isDate(elements.get(i).text()));
@@ -141,12 +188,12 @@ public final class DataProvider
         return days;
     }
 
-    private static void setTimeRanges(Lesson lesson)
+    private static void setTimeRanges(Lesson lesson, List<TimeRange> timeRanges)
     {
         int lessonNum = Integer.parseInt(lesson.getNumber());
-        if (lessonNum <= TIME_RANGES.size())
+        if (lessonNum <= timeRanges.size())
         {
-            lesson.setTime(TIME_RANGES.get(lessonNum - 1));
+            lesson.setTime(timeRanges.get(lessonNum - 1));
         }
     }
 }
